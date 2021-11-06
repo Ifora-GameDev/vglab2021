@@ -12,7 +12,6 @@ namespace Teist
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private int life = 2;
         [SerializeField] private int reward = 10;
-        [SerializeField] private int color;
         [SerializeField] private AnimationCurve movementSpeedCurve;
         [SerializeField] private AnimationCurve rotationCurve;
         
@@ -22,6 +21,7 @@ namespace Teist
          * 0 white
          * 1 black
          */
+        [SerializeField] private int color;
 
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotSpeed;

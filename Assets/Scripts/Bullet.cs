@@ -7,6 +7,14 @@ namespace Teist
         [SerializeField] private float moveSpeed;
         [SerializeField] private int damage;
 
+        /*
+         * color code: 
+         * 0 white
+         * 1 black
+         */
+        [SerializeField] private int color;
+
+
         // Update is called once per frame
         void Update()
         {
