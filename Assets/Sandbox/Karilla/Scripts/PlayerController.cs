@@ -11,15 +11,43 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementDirection;
 
+    private Camera cam;
+
+    private Vector3 viewportPosition;
+
     // Start is called before the first frame update
     void Start()
     {
+        cam = Camera.main;
         
+    }
+
+    void OnBecameVisible()
+    {
+        Debug.Log("Coucou");
     }
 
     void Update()
     {
         processInput();
+    }
+
+    void OnBecameInvisible()
+    {
+        viewportPosition = cam.WorldToViewportPoint(transform.position);
+        Vector3 newPosition = transform.position;
+
+        if (viewportPosition.x > 1 || viewportPosition.x < 0)
+        {
+            newPosition.x = -newPosition.x;
+        }
+
+        if (viewportPosition.y > 1 || viewportPosition.y < 0)
+        {
+            newPosition.y = -newPosition.y;
+        }
+
+        transform.position = newPosition;
     }
 
     private void FixedUpdate()
