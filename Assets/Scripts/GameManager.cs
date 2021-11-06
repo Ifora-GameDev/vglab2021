@@ -1,33 +1,41 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+
+namespace Teist
 {
-    public int money;
-
-    [SerializeField] private Player player;
-
-    
-
-    // Start is called before the first frame update
-    void Awake()
+    public class GameManager : MonoBehaviour
     {
-        Enemy.OnEnDie += Enemy_OnEnDie;
-    }
+        public int money;
+        [SerializeField] private int _enemiesAlive = 0;
+
+        public Wave[] waves;
 
 
-    //Event send when an enemy die, containing money reward information
-    private void Enemy_OnEnDie(int reward)
-    {
-        Debug.Log(reward);
-        money += reward;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Checking player's life
+        [SerializeField] private Player player;
 
 
-        //Managing enemy's spawner
+
+        // Start is called before the first frame update
+        void Awake()
+        {
+            Enemy.OnEnDie += Enemy_OnEnDie;
+        }
+
+
+        //Event send when an enemy die, containing money reward information
+        private void Enemy_OnEnDie(int reward)
+        {
+            Debug.Log(reward);
+            money += reward;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            //Checking player's life
+
+
+            //Managing enemy's spawner
+        }
     }
 }
