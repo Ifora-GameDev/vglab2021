@@ -39,7 +39,7 @@ namespace Teist
             camHalfWidth = Camera.main.aspect * camHalfHeight;
             Debug.Log(waveIndex);
             StartCoroutine(SpawnWave());
-            Debug.Log("waves length"+waves.Length);
+            Debug.Log("waves length" + waves.Length);
         }
 
 
@@ -121,6 +121,7 @@ namespace Teist
 
         void SpawnEnemy(GameObject enemy)
         {
+            //Vector3 positionRnd=new Vector3
             enemiesAlive++;
             Instantiate(enemy, spawnPoint.position, Quaternion.identity);
         }
