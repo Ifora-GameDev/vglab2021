@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        
     }
 
     void OnBecameVisible()
@@ -37,6 +36,10 @@ public class PlayerController : MonoBehaviour
 
     void OnBecameInvisible()
     {
+        if(cam == null)
+        {
+            return;
+        }
         viewportPosition = cam.WorldToViewportPoint(transform.position);
         Vector3 newPosition = transform.position;
 
