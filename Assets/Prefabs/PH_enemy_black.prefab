@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 4741429041328037285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.844, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 622790085911828188}
   m_Father: {fileID: 0}
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -153,12 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d62b0c5f45cf349a43041de461e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 6454573960111179856, guid: 1efe3432957dc3a499ba38f601918107, type: 3}
+  player: {fileID: 1061225546710104662, guid: 946ed8ecb3592c34fb95731619358b75, type: 3}
   bullet: {fileID: 5121624245532554275, guid: 9c862bfb10cb5984d9114a773473cbaa, type: 3}
   spawnPoint: {fileID: 622790085911828188}
   life: 2
   reward: 10
-  color: 0
   movementSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -216,6 +215,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moveSpeed: 0.001
+  color: 0
+  moveSpeed: 0.003
   rotSpeed: 0.25
   fireRate: 1

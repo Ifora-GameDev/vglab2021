@@ -7,7 +7,7 @@ namespace Teist
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private Player player;
+        [SerializeField] private GameObject player;
         [SerializeField] private GameObject bullet;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private int life = 2;
@@ -104,6 +104,7 @@ namespace Teist
 
         public void GetHit(int damage)
         {
+            Debug.Log("ouch! j'ai perdu " + damage + "... salope");
             life -= damage;
 
             if (life <= 0)

@@ -15,8 +15,8 @@ namespace Teist
         private int waveIndex = 0;
         [SerializeField] private Transform spawnPoint;
 
-        [SerializeField] private Player player;
-
+        //[SerializeField] private PlayerManager player;
+        
         private float waveCooldown;
 
         private float camHalfHeight;
@@ -47,7 +47,6 @@ namespace Teist
         void Update()
         {
             //Checking player's life
-
 
             //Managing enemy's spawner
             if (waves[waveIndex].isTimed == false)
@@ -89,7 +88,7 @@ namespace Teist
 
         IEnumerator SpawnWave()
         {
-            Debug.Log("spawning wave " + waveIndex);
+            //Debug.Log("spawning wave " + waveIndex);
             Wave wave = waves[waveIndex];
 
             if(wave.spawnRight)
