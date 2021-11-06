@@ -9,6 +9,10 @@ public class Shooting : MonoBehaviour
     public GameObject bulletObj;
 
     public float bulletForce = 20f;
+
+    public float _fireRate = 2f;
+
+    private float _nextFireTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +27,18 @@ public class Shooting : MonoBehaviour
 
     void processInput()
     {
-        if (Input.GetButtonDown("Fire1")) { Shoot(); };
+        if (Input.GetButton("Fire1")) { Shoot(); };
     }
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletObj, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+        if (Time.time >= _nextFireTime)
+        {
+            GameObject bullet = Instantiate(bulletObj, firePoint.position, firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+            _nextFireTime = Time.time + 1 / _fireRate;
+        }
     }
 }
