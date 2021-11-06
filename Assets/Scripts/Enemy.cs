@@ -71,8 +71,8 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        transform.position=transform.up*patternX.Evaluate(Time.deltaTime * moveSpeed);
-        transform.position = transform.right*patternY.Evaluate(Time.deltaTime * moveSpeed);
+        transform.position+=transform.up*patternX.Evaluate(Time.deltaTime * moveSpeed);
+        transform.position += transform.right*patternY.Evaluate(Time.deltaTime * moveSpeed);
     }
 
     public void GetHit(int damage)
