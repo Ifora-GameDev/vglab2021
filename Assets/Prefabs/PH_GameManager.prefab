@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &580583693874121623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 283807025270609204}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &283807025270609204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580583693874121623}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8222801968820197766}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8632221286058980751
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.21281166, y: 0.5169394, z: -0.36594206}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 283807025270609204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,3 +74,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77704ad9d8826fa41816c0b0d1d5f3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
+  _enemiesAlive: 0
+  waves:
+  - enemies:
+    - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
+    - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
+    - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
+    - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
+    - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
+    rate: 2
+    spawnRight: 0
+    spawnLeft: 0
+    spawnTop: 0
+    spawnBottom: 0
+  spawnPoint: {fileID: 283807025270609204}
+  player: {fileID: 6454573960111179856, guid: 1efe3432957dc3a499ba38f601918107, type: 3}
