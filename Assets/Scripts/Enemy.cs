@@ -4,7 +4,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Player player;
-    //[SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int life=2;
@@ -24,12 +23,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float fireRate;
     private float attackCooldown = 0f; //cooldown
     private float moveCooldown = 0f; //cooldown
-    [SerializeField] private int damage;
-    [SerializeField] private float range;
-    [SerializeField] private float distance;
+
+
+
+    public static event Action<int> OnEnDie;
 
     void Start()
     {
+        GetHit(2);
         //Find and assign player object
         //Find and assign gamemanager object
 
@@ -65,7 +66,6 @@ public class Enemy : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("piou piou!");
         Instantiate(bullet, spawnPoint.position, transform.rotation);
     }
 
@@ -80,8 +80,8 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        transform.position+=transform.up* movementSpeedCurve.Evaluate(moveCooldown) * moveSpeed;
-        transform.Rotate(0,0, rotationCurve.Evaluate(moveCooldown)*rotSpeed,Space.World);
+        transform.position += transform.up* movementSpeedCurve.Evaluate(moveCooldown) * moveSpeed;
+        transform.Rotate(0, 0, rotationCurve.Evaluate(moveCooldown)*rotSpeed,Space.World);
     }
 
     public void GetHit(int damage)
@@ -90,6 +90,8 @@ public class Enemy : MonoBehaviour
 
         if (life <= 0)
         {
+           OnEnDie?.Invoke(reward);
+           
             Debug.Log("enemy " + name + "has dieded");
             Destroy(gameObject);
         }

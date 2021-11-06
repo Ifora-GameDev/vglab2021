@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8389717945414734206}
   m_Layer: 0
   m_Name: PH_bullet_black
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  damage: 1
 --- !u!61 &8389717945414734206
 BoxCollider2D:
   m_ObjectHideFlags: 0

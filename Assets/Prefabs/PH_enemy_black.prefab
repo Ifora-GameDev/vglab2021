@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7800605662190370768}
   m_Layer: 0
   m_Name: PH_enemy_black
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d62b0c5f45cf349a43041de461e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 6454573960111179856, guid: 1efe3432957dc3a499ba38f601918107, type: 3}
+  gameManager: {fileID: 0}
   bullet: {fileID: 5121624245532554275, guid: 9c862bfb10cb5984d9114a773473cbaa, type: 3}
   spawnPoint: {fileID: 622790085911828188}
   life: 2
@@ -202,9 +203,6 @@ MonoBehaviour:
   moveSpeed: 0.001
   rotSpeed: 0.15
   fireRate: 1
-  damage: 0
-  range: 2
-  distance: 10
 --- !u!61 &7800605662190370768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -215,7 +213,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
