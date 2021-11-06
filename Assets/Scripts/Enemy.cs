@@ -10,8 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int life=2;
     [SerializeField] private int reward=10;
     [SerializeField] private int color;
-    [SerializeField] private AnimationCurve patternX;
-    [SerializeField] private AnimationCurve patternY;
+    [SerializeField] private AnimationCurve movementSpeedCurve;
+    [SerializeField] private AnimationCurve rotationCurve;
 
     /*
      * color code: 
@@ -20,8 +20,10 @@ public class Enemy : MonoBehaviour
      */
 
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotSpeed;
     [SerializeField] private float fireRate;
     private float attackCooldown = 0f; //cooldown
+    private float moveCooldown = 0f; //cooldown
     [SerializeField] private int damage;
     [SerializeField] private float range;
     [SerializeField] private float distance;
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour
         //Find and assign player object
         //Find and assign gamemanager object
 
+        Look();
     }
 
     // Update is called once per frame
@@ -45,13 +48,19 @@ public class Enemy : MonoBehaviour
             Shoot();
 
             attackCooldown = 1f / fireRate;
-            Debug.Log(attackCooldown);
+            //Debug.Log(attackCooldown);
             //firerate correspond à nb coup/s; donc le cooldown est l'inverse
             //aka fireRate=2 donc fireCtdw=1/2=.5s
 
         }
+        if (moveCooldown >= 1f)
+        {
+            moveCooldown = 0f;
+        }
+
         Move();
         attackCooldown -= Time.deltaTime;
+        moveCooldown += Time.deltaTime;
     }
 
     private void Shoot()
@@ -71,8 +80,8 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        transform.position+=transform.up*patternX.Evaluate(Time.deltaTime * moveSpeed);
-        transform.position += transform.right*patternY.Evaluate(Time.deltaTime * moveSpeed);
+        transform.position+=transform.up* movementSpeedCurve.Evaluate(moveCooldown) * moveSpeed;
+        transform.Rotate(0,0, rotationCurve.Evaluate(moveCooldown)*rotSpeed,Space.World);
     }
 
     public void GetHit(int damage)
