@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 viewportPosition;
 
+    private Vector2 mousePos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void OnBecameVisible()
     {
-        Debug.Log("Coucou");
+    
     }
 
     void Update()
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         move();
+        rotate();
+
     }
 
     void processInput()
@@ -61,6 +66,8 @@ public class PlayerController : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         movementDirection = new Vector2(moveX, moveY).normalized;
+
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
     }
 
     void move()
@@ -68,4 +75,15 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(movementDirection.x * movementSpeed, movementDirection.y * movementSpeed);
     }
 
+    float getAngleMouse()
+    {
+        Vector2 lookDirection = mousePos - rb.position;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
+        return angle;
+    }
+    
+    void rotate()
+    {
+        rb.rotation = getAngleMouse();
+    }
 }
