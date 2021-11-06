@@ -8,11 +8,15 @@ namespace Teist
     {
         public GameObject[] enemies;
         public float rate = 1;
-        public float timeNextWave = 10f;
+
 
         public bool spawnRight = false;
         public bool spawnLeft = false;
         public bool spawnTop = false;
         public bool spawnBottom = false;
+
+
+        public bool isTimed = false;
+        public float timeNextWave = 10f;
     }
 }

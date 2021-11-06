@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -14,6 +15,7 @@ namespace Teist
         [SerializeField] private int color;
         [SerializeField] private AnimationCurve movementSpeedCurve;
         [SerializeField] private AnimationCurve rotationCurve;
+        
 
         /*
          * color code: 
@@ -27,17 +29,25 @@ namespace Teist
         private float attackCooldown = 0f; //cooldown
         private float moveCooldown = 0f; //cooldown
 
+        private float camHalfHeight;
+        private float camHalfWidth;
 
 
         public static event Action<int> OnEnDie;
 
         void Start()
         {
-            GetHit(2);
+
             //Find and assign player object
             //Find and assign gamemanager object
 
+            camHalfHeight = Camera.main.orthographicSize;
+            camHalfWidth = Camera.main.aspect * camHalfHeight;
+            camHalfHeight = camHalfHeight * .9f;
+            camHalfWidth = camHalfWidth * .9f;
+
             Look();
+            //StartCoroutine(AutoDie());
         }
 
         // Update is called once per frame
@@ -60,6 +70,11 @@ namespace Teist
             if (moveCooldown >= 1f)
             {
                 moveCooldown = 0f;
+            }
+
+            if(transform.position.x<=-camHalfWidth || transform.position.x >= camHalfWidth || transform.position.y <= -camHalfHeight || transform.position.y >= +camHalfHeight)
+            {
+                Look();
             }
 
             Move();
@@ -98,6 +113,12 @@ namespace Teist
                 Debug.Log("enemy " + name + "has dieded");
                 Destroy(gameObject);
             }
+        }
+
+        IEnumerator AutoDie()
+        {
+            yield return new WaitForSeconds(2);
+            GetHit(2);
         }
     }
 }
