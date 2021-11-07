@@ -168,14 +168,12 @@ namespace Teist
 
         public void GetHit(int damage)
         {
-            Debug.Log("ouch! j'ai perdu " + damage);
             life -= damage;
 
             if (life <= 0)
             {
                 OnEnDie?.Invoke(reward);
 
-                Debug.Log("enemy " + name + "has dieded");
                 Destroy(gameObject);
             }
         }

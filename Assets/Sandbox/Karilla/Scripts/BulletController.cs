@@ -33,7 +33,6 @@ public class BulletController : MonoBehaviour
         {
             Enemy e = col.gameObject.GetComponent<Enemy>();
             int c = e.GetColor();
-            Debug.Log("couleur ennemi: " + c);
             if (color == c)
             {
                 e.GetHit(damage*2);

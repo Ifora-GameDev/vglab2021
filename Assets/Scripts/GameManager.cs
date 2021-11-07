@@ -23,7 +23,7 @@ namespace Teist
         private float camHalfHeight;
         private float camHalfWidth;
 
-        private bool gameIsLaunched = false;
+        private bool isWaveSpawnFinished = false;
         private bool isGameOver = false;
         
         public static event Action<int> OnWaveEnd;
@@ -52,9 +52,37 @@ namespace Teist
         void Update()
         {
             if (isGameOver) return;
-            //Checking player's life
 
             //Managing enemy's spawner
+
+            //Si la vague en cours est timée
+            if (waves[waveIndex].isTimed)
+            {
+                if (waveCooldown >= waves[waveIndex].timeNextWave)
+                {
+                    waveCooldown = 0f;
+
+                    if (waveIndex < waves.Length - 1)
+                    {
+                        OnWaveEnd?.Invoke(waveIndex);
+                        waveIndex++;
+                        StartCoroutine(SpawnWave());
+                    }
+                }
+            }
+            else if (isWaveSpawnFinished)
+            {
+                if (enemiesAlive <= 0)
+                {
+                    if (waveIndex < waves.Length - 1)
+                    {
+                        OnWaveEnd?.Invoke(waveIndex);
+                        waveIndex++;
+                        StartCoroutine(SpawnWave());
+                    }
+                }
+            }
+            /*
             if (waves[waveIndex].isTimed == false)
             {
                 if (enemiesAlive <= 0)
@@ -83,18 +111,21 @@ namespace Teist
                 }
             
             }
+            */
 
-            if(gameIsLaunched && waveIndex >= waves.Length && enemiesAlive<=0)
+            /*
+            if (isWaveFinished && waveIndex >= waves.Length && enemiesAlive<=0)
             {
                 isGameOver = true;
                 Debug.Log("game over, you win");
-            }
+            }*/
             waveCooldown += Time.deltaTime;
         }
 
         IEnumerator SpawnWave()
         {
-            //Debug.Log("spawning wave " + waveIndex);
+            isWaveSpawnFinished = false;
+            Debug.Log("spawning wave " + waveIndex);
             Wave wave = waves[waveIndex];
 
 
@@ -126,8 +157,8 @@ namespace Teist
                 StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
                 yield return new WaitForSeconds(1f / wave.rate);
             }
-
-            Debug.Log(waveIndex);
+            isWaveSpawnFinished = true;
+            //Debug.Log(waveIndex);
         }
 
 
@@ -136,7 +167,6 @@ namespace Teist
             Instantiate(vfxWarning, spawnPoint.position, Quaternion.identity);
             yield return new WaitForSeconds(2f);
             enemiesAlive++;
-            gameIsLaunched = true;
             GameObject e = Instantiate(enemy, path.points[0].transform.position, Quaternion.identity);
             e.GetComponent<Enemy>().Init(path,isLerp);
         }
