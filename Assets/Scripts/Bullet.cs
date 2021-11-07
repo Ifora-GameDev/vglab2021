@@ -17,7 +17,7 @@ namespace Teist
 
         void OnTriggerEnter2D(Collider2D col)
         {
-            Debug.Log("tu m'as eu " + damage + "... salope");
+            Debug.Log("tu m'as eu " + damage);
             //If the bullet collide with the player, he takes damage
             if (col.gameObject.tag == "Player")
             {

@@ -9,6 +9,7 @@ namespace Teist
         public GameObject[] enemies;
         public float rate = 1;
 
+        public Waypoints path;
 
         public bool spawnRight = false;
         public bool spawnLeft = false;

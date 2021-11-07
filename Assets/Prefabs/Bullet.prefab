@@ -144,6 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bc4f2a302d68640b548b2ff4f44f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
   damage: 1
   color: 0
