@@ -119,9 +119,8 @@ MonoBehaviour:
     - {fileID: 8131892416590758347, guid: 6d7060c81393e4d4fb6109010c64228a, type: 3}
     - {fileID: 8131892416590758347, guid: a74a6ff2d7ef26b478639fc15e4e84b4, type: 3}
     - {fileID: 8131892416590758347, guid: a74a6ff2d7ef26b478639fc15e4e84b4, type: 3}
-    rate: 5
+    rate: 6
     path: {fileID: 119781505478393368}
-    isLerp: 0
     isTimed: 0
     timeNextWave: 2
   - enemies:
@@ -132,9 +131,8 @@ MonoBehaviour:
     - {fileID: 8131892416590758347, guid: a74a6ff2d7ef26b478639fc15e4e84b4, type: 3}
     rate: 5
     path: {fileID: 7681946071795019518}
-    isLerp: 0
     isTimed: 1
-    timeNextWave: 2
+    timeNextWave: 15
   - enemies:
     - {fileID: 8131892416590758347, guid: a74a6ff2d7ef26b478639fc15e4e84b4, type: 3}
     - {fileID: 8131892416590758347, guid: 6d7060c81393e4d4fb6109010c64228a, type: 3}
@@ -143,9 +141,8 @@ MonoBehaviour:
     - {fileID: 8131892416590758347, guid: a74a6ff2d7ef26b478639fc15e4e84b4, type: 3}
     rate: 5
     path: {fileID: 7681946071795019518}
-    isLerp: 0
     isTimed: 1
-    timeNextWave: 2
+    timeNextWave: 15
   spawnPoint: {fileID: 1222319825359396276}
   vfxWarning: {fileID: 4586321296771538854, guid: c8f1597407976bc4cad13b4fd3bd58ef, type: 3}
 --- !u!1001 &3232451718577939880

@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!_areInputsEnable)
         {
+            rb.velocity = new Vector2(0, 0);
             return;
         }
 
