@@ -69,18 +69,23 @@ public class PlayerController : MonoBehaviour
 
     void processInput()
     {
-        if(_areInputsEnable==false)
+        if(!_areInputsEnable)
         {
+            Debug.Log("Aled");
             rb.velocity = new Vector2(0, 0);
             return;
         }
+        else
+        {
+            float moveX = Input.GetAxisRaw("Horizontal");
+            float moveY = Input.GetAxisRaw("Vertical");
 
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+            movementDirection = new Vector2(moveX, moveY).normalized;
 
-        movementDirection = new Vector2(moveX, moveY).normalized;
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        }
 
-        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        
     }
 
     void move()
