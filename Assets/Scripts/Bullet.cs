@@ -9,11 +9,10 @@ namespace Teist
 
         /*
          * color code: 
-         * 0 white
-         * 1 black
+         * 0 orange
+         * 1 blue
          */
         [SerializeField] private int color;
-
 
         // Update is called once per frame
         void Update()
@@ -24,10 +23,14 @@ namespace Teist
 
         void OnTriggerEnter2D(Collider2D col)
         {
+            Debug.Log("tu m'as eu " + damage);
             //If the bullet collide with the player, he takes damage
             if (col.gameObject.tag == "Player")
             {
+                PlayerManager pm = col.gameObject.GetComponent<PlayerManager>();
+                pm.GetHit(damage);
                 //hit Player
+                Debug.Log("perdu");
                 Destroy(gameObject);
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Teist
 {
     public class GameManager : MonoBehaviour
     {
-        public int money;
+        [SerializeField] public static int money;
         [SerializeField] private int enemiesAlive = 0;
 
         public Wave[] waves;
@@ -15,13 +16,19 @@ namespace Teist
         private int waveIndex = 0;
         [SerializeField] private Transform spawnPoint;
 
-        [SerializeField] private Player player;
-
+        //[SerializeField] private PlayerManager player;
+        
         private float waveCooldown;
 
         private float camHalfHeight;
         private float camHalfWidth;
 
+        private bool gameIsLaunched = false;
+        private bool isGameOver = false;
+        
+        public static event Action<int> OnWaveEnd;
+
+        [SerializeField] private GameObject vfxWarning;
 
         // Start is called before the first frame update
         void Awake()
@@ -37,17 +44,15 @@ namespace Teist
 
             camHalfHeight = Camera.main.orthographicSize;
             camHalfWidth = Camera.main.aspect * camHalfHeight;
-            Debug.Log(waveIndex);
             StartCoroutine(SpawnWave());
-            Debug.Log("waves length" + waves.Length);
         }
 
 
         // Update is called once per frame
         void Update()
         {
+            if (isGameOver) return;
             //Checking player's life
-
 
             //Managing enemy's spawner
             if (waves[waveIndex].isTimed == false)
@@ -56,42 +61,46 @@ namespace Teist
                 {
                     if (waveIndex < waves.Length-1)
                     {
+                        OnWaveEnd?.Invoke(waveIndex);
                         waveIndex++;
                         StartCoroutine(SpawnWave());
                     }
-                    else
-                    {
-                        Debug.Log("game over, you win");
-                    }
                 }
             }
+
             else
             {
                 if (waveCooldown >= waves[waveIndex].timeNextWave)
                 {
                     waveCooldown = 0f;
                 
-
                     if (waveIndex < waves.Length-1)
                     {
+                        OnWaveEnd?.Invoke(waveIndex);
                         waveIndex++;
                         StartCoroutine(SpawnWave());
                     }
-                    else
-                    {
-                        Debug.Log("game over, you win");
-                    }
                 }
             
+            }
+
+            if(gameIsLaunched && waveIndex >= waves.Length && enemiesAlive<=0)
+            {
+                isGameOver = true;
+                Debug.Log("game over, you win");
             }
             waveCooldown += Time.deltaTime;
         }
 
         IEnumerator SpawnWave()
         {
-            Debug.Log("spawning wave " + waveIndex);
+            //Debug.Log("spawning wave " + waveIndex);
             Wave wave = waves[waveIndex];
 
+
+            //A MODIFIER SI ON VEUT POUVOIR CHANGER LE PATTERN EN FONCTION DE LA DIRECTION
+            //VOIR AVEC WAVE
+            /*
             if(wave.spawnRight)
             {
                 spawnPoint.position = new Vector3(camHalfWidth, 0, 0);
@@ -108,10 +117,12 @@ namespace Teist
             {
                 spawnPoint.position = new Vector3(0, -camHalfHeight,  0);
             }
-
+            */
             foreach (GameObject enemy in wave.enemies)
             {
-                SpawnEnemy(enemy);
+
+                yield return new WaitForSeconds(2f);
+                StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
                 yield return new WaitForSeconds(1f / wave.rate);
             }
 
@@ -119,18 +130,20 @@ namespace Teist
         }
 
 
-        void SpawnEnemy(GameObject enemy)
+        IEnumerator SpawnEnemy(GameObject enemy,Waypoints path, bool isLerp)
         {
-            //Vector3 positionRnd=new Vector3
+            Instantiate(vfxWarning, spawnPoint.position, Quaternion.identity);
+            yield return new WaitForSeconds(2f);
             enemiesAlive++;
-            Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+            gameIsLaunched = true;
+            GameObject e = Instantiate(enemy, path.points[0].transform.position, Quaternion.identity);
+            e.GetComponent<Enemy>().Init(path,isLerp);
         }
 
 
         //Event send when an enemy die, containing money reward information
         private void Enemy_OnEnDie(int reward)
         {
-            Debug.Log(reward);
             money += reward;
             enemiesAlive--;
             if (enemiesAlive < 0)

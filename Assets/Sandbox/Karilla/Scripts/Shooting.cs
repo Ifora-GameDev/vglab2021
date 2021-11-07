@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
 
-    public GameObject bulletObj;
+    public GameObject[] bulletObj;
 
     public float bulletForce = 20f;
 
     public float _fireRate = 2f;
 
+<<<<<<< HEAD
     public int color;
+=======
+    /*
+     * color code: 
+     * 0 orange
+     * 1 blue
+     */
+    [SerializeField] private int color=0;
+    // Start is called before the first frame update
+>>>>>>> e228b6249454e085d943e84edf2d7f1065f9ce2e
 
     private float _nextFireTime = 0f;
     // Start is called before the first frame update
@@ -30,17 +38,23 @@ public class Shooting : MonoBehaviour
     void processInput()
     {
         if (Input.GetButton("Fire1")) { Shoot(); };
+        if (Input.GetButton("Fire2")) { ChangeColor(); };
     }
 
     void Shoot()
     {
         if (Time.time >= _nextFireTime)
         {
-            GameObject bullet = Instantiate(bulletObj, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(bulletObj[color], firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
 
             _nextFireTime = Time.time + 1 / _fireRate;
         }
+    }
+    void ChangeColor()
+    {
+        if (color == 0) { color = 1; }
+        else { color = 0; }
     }
 }
