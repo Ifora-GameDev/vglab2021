@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Teist;
 
@@ -10,8 +8,8 @@ public class BulletController : MonoBehaviour
 
     /*
      * color code: 
-     * 0 white
-     * 1 black
+     * 0 orange
+     * 1 blue
      */
     [SerializeField] private int color;
     // Start is called before the first frame update
@@ -34,9 +32,17 @@ public class BulletController : MonoBehaviour
         if (col.gameObject.tag == "Enemy")
         {
             Enemy e = col.gameObject.GetComponent<Enemy>();
-            e.GetHit(damage);
+            int c = e.GetColor();
+            if (color == c)
+            {
+                e.GetHit(damage*2);
+            }
+            else
+            {
+                e.GetHit(damage);
+            }
+
             //hit Player
-            Debug.Log("gagné");
             Destroy(gameObject);
         }
     }

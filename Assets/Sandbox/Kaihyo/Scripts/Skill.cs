@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class Skill
 {
+    [SerializeField] private int _id = 0;
     [SerializeField] private int _level = 1;
     [SerializeField] private int _requiredTurnsAmount = 1;
     [SerializeField] private int _repairingCost = 1000;
@@ -14,6 +15,7 @@ public class Skill
 
     public bool IsActive => _isActive;
     public bool HasBeenActivated => _hasBeenActivated;
+    public int ID => _id;
     public int Level => _level;
     public int RequiredTurnsAmount => _requiredTurnsAmount;
     public int RepairingCost => _repairingCost;
