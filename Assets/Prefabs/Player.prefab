@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 1061225546710104657}
   - component: {fileID: 1061225546710104656}
   - component: {fileID: 1061225546710104663}
-  - component: {fileID: 1061225546710104659}
   - component: {fileID: 1061225546710104684}
-  - component: {fileID: 7895286155525210701}
   - component: {fileID: 7895286155525210702}
+  - component: {fileID: 8199265536065110644}
+  - component: {fileID: 1061225546710104659}
+  - component: {fileID: 7895286155525210701}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +125,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rb: {fileID: 1061225546710104656}
+--- !u!114 &1061225546710104684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061225546710104662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c23c36ba51e8714282129e38514126c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 1061225547891829289}
+  bulletObj: {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
+  bulletForce: 30
+  _fireRate: 2
+--- !u!114 &7895286155525210702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061225546710104662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7545e720ccc89984db512fc177d3de0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 1061225547891829288}
+  distanceGrapinMax: 5
+  expandTime: 1
+--- !u!114 &8199265536065110644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061225546710104662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa3807e6d4b6d142b4d3f524ab63e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1061225546710104659
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,7 +175,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061225546710104662}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -150,21 +194,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1061225546710104684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061225546710104662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c23c36ba51e8714282129e38514126c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 1061225547891829289}
-  bulletObj: {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
-  bulletForce: 30
 --- !u!120 &7895286155525210701
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -263,21 +292,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &7895286155525210702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1061225546710104662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7545e720ccc89984db512fc177d3de0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPoint: {fileID: 1061225547891829288}
-  distanceGrapinMax: 5
-  expandTime: 1
 --- !u!1 &1061225547891829288
 GameObject:
   m_ObjectHideFlags: 0

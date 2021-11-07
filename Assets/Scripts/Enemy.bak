@@ -1,0 +1,187 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+
+namespace Teist
+{
+    public class Enemy : MonoBehaviour
+    {
+        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private int life = 2;
+        [SerializeField] private int reward = 10;
+
+        [SerializeField] private AnimationCurve movementSpeedCurve;
+        [SerializeField] private AnimationCurve rotationCurve;
+
+        private float moveCooldown = 0f; //cooldown
+        private float rotateCooldown = 0f; //cooldown
+
+        private float moveCurveTime = 0f; //cooldown
+        private float rotateCurveTime = 0f; //cooldown
+        private bool canStart = false;
+
+        /*
+         * color code: 
+         * 0 white
+         * 1 black
+         */
+        [SerializeField] private int color;
+
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float rotSpeed;
+        [SerializeField] private float fireRate;
+
+        [SerializeField] private bool doHalfTurned;
+        private float attackCooldown = 0f; //cooldown
+
+        private float camHalfHeight;
+        private float camHalfWidth;
+        private float camHalfHeightMax;
+        private float camHalfWidthMax;
+
+        private Waypoints path;
+        public static event Action<int> OnEnDie;
+
+        void Start()
+        {
+
+            Debug.Log("Start path " + path + "received");
+
+            //Find and assign player object
+            //Find and assign gamemanager object
+
+            //move
+            int lastKeyID=movementSpeedCurve.length;
+            moveCurveTime = movementSpeedCurve.keys[lastKeyID - 1].time;
+
+            lastKeyID=rotationCurve.length;
+            rotateCurveTime = rotationCurve.keys[lastKeyID - 1].time;
+
+            Debug.Log("move time :"+ moveCurveTime);
+            Debug.Log("rotate time :"+ rotateCurveTime);
+
+
+            camHalfHeight = Camera.main.orthographicSize;
+            camHalfWidth = Camera.main.aspect * camHalfHeight;
+            camHalfHeight = camHalfHeight * .9f;
+            camHalfWidth = camHalfWidth * .9f;
+
+            camHalfHeightMax = camHalfHeight * 1.6f;
+            camHalfWidthMax = camHalfWidth * 1.4f;
+
+            Look();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+            Debug.Log("path " + path + " set, can go");
+            //Look();
+
+            //distance = Vector3.Distance(player.transform.position, transform.position);
+            if (attackCooldown <= 0f)
+            {
+                //On tire
+                Shoot();
+
+                attackCooldown = 1f / fireRate;
+                //Debug.Log(attackCooldown);
+                //firerate correspond à nb coup/s; donc le cooldown est l'inverse
+                //aka fireRate=2 donc fireCtdw=1/2=.5s
+            }
+
+            if (moveCooldown >= moveCurveTime)
+            {
+                moveCooldown = 0f;
+            }
+            if (rotateCooldown >= rotateCurveTime)
+            {
+                moveCooldown = 0f;
+            }
+
+
+            if (doHalfTurned)
+            {
+                if (transform.position.x <= -camHalfWidth || transform.position.x >= camHalfWidth || transform.position.y <= -camHalfHeight || transform.position.y >= +camHalfHeight)
+                {
+                    Look();
+                }
+            }
+            else
+            {
+
+                if (transform.position.x <= -camHalfWidthMax || transform.position.x >= camHalfWidthMax || transform.position.y <= -camHalfHeightMax || transform.position.y >= +camHalfHeightMax)
+                {
+
+                    OnEnDie?.Invoke(0);
+
+                    Destroy(gameObject);
+                }
+            }
+
+            Move();
+
+            attackCooldown -= Time.deltaTime;
+            moveCooldown += Time.deltaTime;
+            rotateCooldown += Time.deltaTime;
+        }
+
+
+        private void Shoot()
+        {
+            Instantiate(bullet, spawnPoint.position, transform.rotation);
+        }
+
+
+        private void Look()
+        {
+            float angle = 0;
+
+            Vector3 relative = transform.InverseTransformPoint(player.transform.position);
+            angle = Mathf.Atan2(relative.x, relative.y) * Mathf.Rad2Deg;
+            transform.Rotate(0, 0, -angle);
+        }
+
+
+        private void Move()
+        {
+            transform.position += transform.up * movementSpeedCurve.Evaluate(moveCooldown) * moveSpeed;
+            transform.Rotate(0, 0, rotationCurve.Evaluate(rotateCooldown) * rotSpeed, Space.World);
+        }
+
+        public void SetPath(Waypoints p)
+        {
+            path = p;
+            Debug.Log("path " + p + "received");
+            Debug.Log("path " + path + "received");
+        }
+
+        public void GetHit(int damage)
+        {
+            Debug.Log("ouch! j'ai perdu " + damage + "... salope");
+            life -= damage;
+
+            if (life <= 0)
+            {
+                OnEnDie?.Invoke(reward);
+
+                Debug.Log("enemy " + name + "has dieded");
+                Destroy(gameObject);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            // Draw a semitransparent blue cube at the transforms position
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawLine(new Vector3(-camHalfWidthMax, -camHalfHeightMax), new Vector3(-camHalfWidthMax, camHalfHeightMax));
+            Gizmos.DrawLine(new Vector3(-camHalfWidthMax, camHalfHeightMax), new Vector3(camHalfWidthMax, camHalfHeightMax));
+            Gizmos.DrawLine(new Vector3(camHalfWidthMax, camHalfHeightMax), new Vector3(camHalfWidthMax, -camHalfHeightMax));
+            Gizmos.DrawLine(new Vector3(-camHalfWidthMax, -camHalfHeightMax), new Vector3(camHalfWidthMax, -camHalfHeightMax));
+        }
+    }
+}
