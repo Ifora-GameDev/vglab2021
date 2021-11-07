@@ -7,7 +7,7 @@ namespace Teist
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] private GameObject player;
+        //[SerializeField] private GameObject player;
         [SerializeField] private GameObject bullet;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private int life = 2;
@@ -16,8 +16,8 @@ namespace Teist
 
         /*
          * color code: 
-         * 0 white
-         * 1 black
+         * 0 orange
+         * 1 blue
          */
         [SerializeField] private int color;
 
@@ -56,8 +56,6 @@ namespace Teist
 
         void Start()
         {
-
-            Debug.Log("Start path " + path + "received");
             target = path.points[waypointIndex];
 
             startTime = Time.time;
@@ -163,16 +161,19 @@ namespace Teist
             path = p;
         }
 
+        public int GetColor()
+        {
+            return color;
+        }
+
         public void GetHit(int damage)
         {
-            Debug.Log("ouch! j'ai perdu " + damage);
             life -= damage;
 
             if (life <= 0)
             {
                 OnEnDie?.Invoke(reward);
 
-                Debug.Log("enemy " + name + "has dieded");
                 Destroy(gameObject);
             }
         }

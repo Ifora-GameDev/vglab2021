@@ -15,10 +15,11 @@ GameObject:
   - component: {fileID: 1061225546710104684}
   - component: {fileID: 7895286155525210702}
   - component: {fileID: 8199265536065110644}
+  - component: {fileID: 8017871239096931504}
   - component: {fileID: 1061225546710104659}
   - component: {fileID: 7895286155525210701}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,14 +32,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061225546710104662}
-  m_LocalRotation: {x: 0, y: 0, z: -0.9864152, w: -0.16427137}
-  m_LocalPosition: {x: -2.7486038, y: -2.1543612, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9864149, w: 0.16427304}
+  m_LocalPosition: {x: -2.7486038, y: -2.1543612, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 1061225547891829289}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 161.09}
 --- !u!212 &1061225546710104657
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,9 +139,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1061225547891829289}
-  bulletObj: {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
+  bulletObj:
+  - {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
+  - {fileID: 6181866715694737258, guid: 4ddd3acf72f899d48a805997900f8725, type: 3}
   bulletForce: 30
   _fireRate: 2
+  color: 0
 --- !u!114 &7895286155525210702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +173,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 5
+--- !u!114 &8017871239096931504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061225546710104662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f6f636a3935da4b82c30b015cd1d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRadius: 10
+  _fireRate: 1
 --- !u!61 &1061225546710104659
 BoxCollider2D:
   m_ObjectHideFlags: 0
