@@ -85,11 +85,9 @@ namespace Teist
                     waveCooldown += Time.deltaTime;
                 }
                 else if (isWaveSpawnFinished)
-                {
-                    Debug.Log("Wave finished ! <color=red>Enemies alive : </color>" + enemiesAlive.ToString());
+                { 
                     if (enemiesAlive <= 0)
                     {
-                        Debug.Log("Enemies <= 0 ! <color=red>Enemies alive : </color>" + enemiesAlive.ToString());
                         if (waveIndex < waves.Length - 1)
                         {
                             OnWaveEnd?.Invoke(waveIndex);
