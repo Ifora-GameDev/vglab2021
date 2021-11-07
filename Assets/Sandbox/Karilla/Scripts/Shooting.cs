@@ -12,6 +12,13 @@ public class Shooting : MonoBehaviour
 
     public float _fireRate = 2f;
 
+    public SpriteRenderer baseCanon;
+
+    public SpriteRenderer canon;
+
+    private Color orange;
+
+    private Color blue;
     /*
      * color code: 
      * 0 orange
@@ -24,7 +31,11 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        orange = new Color(1, 0.5333334f, 0, 1);
+        blue = new Color(0,0.9529412f,1,1);
+
+        canon.color = blue;
+        baseCanon.color = blue;
     }
 
     // Update is called once per frame
@@ -36,7 +47,7 @@ public class Shooting : MonoBehaviour
     void processInput()
     {
         if (Input.GetButton("Fire1")) { Shoot(); };
-        if (Input.GetButton("Fire2")) { ChangeColor(); };
+        if (Input.GetButtonDown("Fire2")) { ChangeColor(); };
     }
 
     void Shoot()
@@ -58,7 +69,16 @@ public class Shooting : MonoBehaviour
     }
     void ChangeColor()
     {
-        if (color == 0) { color = 1; }
-        else { color = 0; }
+        if (color == 0)
+        {
+            color = 1;
+            canon.color = orange;
+            baseCanon.color = orange;
+        }
+        else {
+            color = 0;
+            canon.color = blue;
+            baseCanon.color = blue;
+        }
     }
 }
