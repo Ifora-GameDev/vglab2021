@@ -165,6 +165,7 @@ MonoBehaviour:
   firePoint: {fileID: 1061225547891829289}
   bulletObj: {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
   bulletForce: 30
+  _fireRate: 2
 --- !u!120 &7895286155525210701
 LineRenderer:
   m_ObjectHideFlags: 0

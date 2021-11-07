@@ -12,6 +12,8 @@ public class Shooting : MonoBehaviour
 
     public float _fireRate = 2f;
 
+    public int color;
+
     private float _nextFireTime = 0f;
     // Start is called before the first frame update
     void Start()
