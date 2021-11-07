@@ -1,13 +1,14 @@
 using System;
-using System.Collections;
 using UnityEngine;
-
+using TMPro;
 
 namespace Teist
 {
     public class Enemy : MonoBehaviour
     {
-
+        [SerializeField] private TextMeshProUGUI textReward;
+        [SerializeField] private GameObject UICanva;
+        
 
         private GameObject player;
         [SerializeField] private GameObject bullet;
@@ -15,6 +16,8 @@ namespace Teist
         [SerializeField] private int life = 2;
         [SerializeField] private int reward = 10;
         [SerializeField] private Renderer rend;
+
+
         [SerializeField] private Renderer[] rendInChilds;
         [SerializeField] private Collider2D collisionneur;
 
@@ -64,6 +67,7 @@ namespace Teist
 
         void Start()
         {
+            textReward.text = "+"+ reward.ToString()+" C!";
             aSource = GetComponent<AudioSource>();
             //rend = GetComponent<Renderer>();
             collisionneur = GetComponent<Collider2D>();
@@ -196,7 +200,11 @@ namespace Teist
                 {
                     r.enabled = false;
                 }
+
+                UICanva.SetActive(true);
+
                 aSource.PlayOneShot(sfxExplode);
+
                 OnEnDie?.Invoke(reward);
                 Destroy(gameObject,2f);
             }
