@@ -20,17 +20,24 @@ public class ShmupUIManager : MonoBehaviour
     {
         PlayerSkillsController.OnRocketCountChanged += UpdateRocketText;
         Teist.GameManager.OnWaveEnd += HandleWaveEnd;
+        HackController.OnHackEnd += HandleHackEnd;
     }
 
     private void OnDisable()
     {
         PlayerSkillsController.OnRocketCountChanged -= UpdateRocketText;
         Teist.GameManager.OnWaveEnd -= HandleWaveEnd;
+        HackController.OnHackEnd -= HandleHackEnd;
     }
 
     private void HandleWaveEnd(int _)
     {
         SetHUDVisible(false);
+    }
+
+    private void HandleHackEnd()
+    {
+        SetHUDVisible(true);
     }
 
     private void SetHUDVisible(bool isVisible)

@@ -23,19 +23,25 @@ namespace Teist
         private float camHalfHeight;
         private float camHalfWidth;
 
+        private bool isSpawnActive = true;
         private bool isWaveSpawnFinished = false;
         private bool isGameOver = false;
         
         public static event Action<int> OnWaveEnd;
+        public static event Action OnGameWin;
 
         [SerializeField] private GameObject vfxWarning;
 
-        // Start is called before the first frame update
-        void Awake()
+        private void OnEnable()
         {
             Enemy.OnEnDie += Enemy_OnEnDie;
+            HackController.OnHackEnd += StartNextWave;
         }
 
+        private void OnDisable()
+        {
+            HackController.OnHackEnd -= StartNextWave;
+        }
 
         private void Start()
         {
@@ -56,34 +62,56 @@ namespace Teist
             //Managing enemy's spawner
 
             //Si la vague en cours est timée
-            if (waves[waveIndex].isTimed)
+            if (isSpawnActive)
             {
-                if (waveCooldown >= waves[waveIndex].timeNextWave)
+                if (waves[waveIndex].isTimed)
                 {
-                    waveCooldown = 0f;
-
-                    if (waveIndex < waves.Length - 1)
+                    if (waveCooldown >= waves[waveIndex].timeNextWave)
                     {
-                        OnWaveEnd?.Invoke(waveIndex);
-                        waveIndex++;
-                        StartCoroutine(SpawnWave());
+                        waveCooldown = 0f;
+
+                        if (waveIndex < waves.Length - 1)
+                        {
+                            OnWaveEnd?.Invoke(waveIndex);
+                            isSpawnActive = false;
+                        }
+                        else
+                        {
+                            Debug.Log("<color=green>YOU WIN !</color>");
+                            OnGameWin?.Invoke();
+                        }
+                    }
+
+                    waveCooldown += Time.deltaTime;
+                }
+                else if (isWaveSpawnFinished)
+                {
+                    Debug.Log("Wave finished ! <color=red>Enemies alive : </color>" + enemiesAlive.ToString());
+                    if (enemiesAlive <= 0)
+                    {
+                        Debug.Log("Enemies <= 0 ! <color=red>Enemies alive : </color>" + enemiesAlive.ToString());
+                        if (waveIndex < waves.Length - 1)
+                        {
+                            OnWaveEnd?.Invoke(waveIndex);
+                            isSpawnActive = false;
+                        }
+                        else
+                        {
+                            Debug.Log("<color=green>YOU WIN !</color>");
+                            OnGameWin?.Invoke();
+                        }
                     }
                 }
             }
-            else if (isWaveSpawnFinished)
-            {
-                if (enemiesAlive <= 0)
-                {
-                    if (waveIndex < waves.Length - 1)
-                    {
-                        OnWaveEnd?.Invoke(waveIndex);
-                        waveIndex++;
-                        StartCoroutine(SpawnWave());
-                    }
-                }
-            }
 
-            waveCooldown += Time.deltaTime;
+        }
+
+        private void StartNextWave()
+        {
+            waveIndex++;
+            isWaveSpawnFinished = false;
+            isSpawnActive = true;
+            StartCoroutine(SpawnWave());
         }
 
         IEnumerator SpawnWave()
@@ -114,12 +142,11 @@ namespace Teist
             foreach (GameObject enemy in wave.enemies)
             {
 
-                yield return new WaitForSeconds(2f);
-                StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
+                //yield return new WaitForSeconds(2f);
+                yield return StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
                 yield return new WaitForSeconds(1f / wave.rate);
             }
             isWaveSpawnFinished = true;
-            //Debug.Log(waveIndex);
         }
 
 

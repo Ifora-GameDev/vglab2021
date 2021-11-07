@@ -14,6 +14,18 @@ namespace Teist
          */
         [SerializeField] private int color;
 
+        private void OnEnable()
+        {
+            GameManager.OnGameWin += HandleScreenClear;
+            GameManager.OnWaveEnd += HandleScreenClear;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameWin -= HandleScreenClear;
+            GameManager.OnWaveEnd -= HandleScreenClear;
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -33,6 +45,16 @@ namespace Teist
                 Debug.Log("perdu");
                 Destroy(gameObject);
             }
+        }
+
+        private void HandleScreenClear()
+        {
+            Destroy(gameObject);
+        }
+
+        private void HandleScreenClear(int _)
+        {
+            Destroy(gameObject);
         }
 
         void OnBecameInvisible()
