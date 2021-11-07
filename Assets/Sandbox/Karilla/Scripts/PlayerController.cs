@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
     {
         move();
         rotate();
-
     }
 
     void processInput()
@@ -87,9 +86,38 @@ public class PlayerController : MonoBehaviour
     void move()
     {
         rb.velocity = new Vector2(movementDirection.x * movementSpeed, movementDirection.y * movementSpeed);
-        if (transform.position.x < -camHalfHeight)
+
+
+        //Check to stay in screen
+        if (transform.position.x < -camHalfWidth)
         {
-            //transform.position.x = camHalfHeight;
+            if (movementDirection.x < 0)
+            {
+                rb.velocity = new Vector2(0, movementDirection.y * movementSpeed);
+            }
+            
+        }
+        if (transform.position.x > camHalfWidth)
+        {
+            if (movementDirection.x > 0)
+            {
+                rb.velocity = new Vector2(0, movementDirection.y * movementSpeed);
+            }
+        }
+
+        if (transform.position.y < -camHalfHeight)
+        {
+            if (movementDirection.y < 0)
+            {
+                rb.velocity = new Vector2(movementDirection.x * movementSpeed,0);
+            }
+        }
+        if (transform.position.y > camHalfHeight)
+        {
+            if (movementDirection.y > 0)
+            {
+                rb.velocity = new Vector2(movementDirection.x * movementSpeed, 0);
+            }
         }
 
     }
