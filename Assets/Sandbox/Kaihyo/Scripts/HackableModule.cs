@@ -5,25 +5,15 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(MeshRenderer), typeof(Collider))]
-public class HackableContent : MonoBehaviour
+public class HackableModule : MonoBehaviour
 {
-    [SerializeField] private int _requiredTurnsAmount = 1;
     [SerializeField] private Skill _skill = null;
+    [Header("Placeholder colors")]
     [SerializeField] private Color _defaultTint = Color.white;
     [SerializeField] private Color _disableTint = Color.grey;
     [SerializeField] private Color _hackedTint = Color.green;
     [SerializeField] private Color _hoverTint = Color.blue;
-    [Header("Repairs")]
     [SerializeField] private Color _brokenTint = Color.red;
-
-    // POWER UP CLASS
-    // - ID (pour pouvoir les identifier facilement)
-    // - Nombre de tours pour le débloquer
-    // - Coût en points pour le réparer
-    // - Effet du pouvoir
-    // - Toggle IsActive
-    // - Niveau du pouvoir (1, 2 ou 3)
-    // - Pouvoir précédent (pour la dépendance de débloquage)
 
     // Components
     private Renderer _renderer = null;
@@ -38,8 +28,8 @@ public class HackableContent : MonoBehaviour
     private bool _needsFix = false;
     #endregion
 
-    public static event Action<HackableContent> OnMEnter;
-    public static event Action<HackableContent> OnMExit;
+    public static event Action<HackableModule> OnMEnter;
+    public static event Action<HackableModule> OnMExit;
     public static event Action<Queue<GameObject>> OnHackComplete;
     public static event Action OnSkillUnlocked;
     public static event Action<Queue<GameObject>> OnBreak;
@@ -69,7 +59,7 @@ public class HackableContent : MonoBehaviour
 
     private void Start()
     {
-        var tint = _skill.IsAvailable ? _defaultTint : _disableTint;
+        var tint = DeduceTint();
         _renderer.material.SetColor("_Color", tint);
         _collider.enabled = _skill.IsAvailable;
         _skill.SetActive(false);
@@ -83,11 +73,9 @@ public class HackableContent : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (_needsFix || !_isHacked)
-        {
-            var tint = _needsFix ? _brokenTint : _defaultTint;
-            _renderer.material.SetColor("_Color", tint);
-        }
+        var tint = DeduceTint();
+        _renderer.material.SetColor("_Color", tint);
+
 
         OnMExit?.Invoke(this);
     }
@@ -95,11 +83,11 @@ public class HackableContent : MonoBehaviour
     public void FixContent()
     {
         _skill.SetActive(_skill.HasBeenActivated);
-        var tint = _isHacked ? _hackedTint : _hoverTint;
+        var tint = DeduceTint();
         _renderer.material.SetColor("_Color", tint);
 
         _needsFix = false;
-        _collider.enabled = !_isHacked;
+        _collider.enabled = !_isHacked && _skill.IsAvailable;
     }
 
     public void BreakContent()
@@ -149,7 +137,16 @@ public class HackableContent : MonoBehaviour
 
     private void TryUnlock()
     {
+        Color tint = DeduceTint();
+
+        _renderer.material.SetColor("_Color", tint);
+        _collider.enabled = (_skill.IsAvailable && !_skill.IsActive) || (_needsFix);
+    }
+
+    private Color DeduceTint()
+    {
         Color tint;
+
         if(_needsFix)
         {
             tint = _brokenTint;
@@ -163,7 +160,6 @@ public class HackableContent : MonoBehaviour
             tint = _disableTint;
         }
 
-        _renderer.material.SetColor("_Color", tint);
-        _collider.enabled = _skill.IsAvailable && !_skill.IsActive;
+        return tint;
     }
 }

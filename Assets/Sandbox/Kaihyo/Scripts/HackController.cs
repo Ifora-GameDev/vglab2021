@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +5,9 @@ public class HackController : MonoBehaviour
 {
     [SerializeField] private int _startingDroneAmount = 3;
     [SerializeField] private GameObject _dronePrefab = null;
-    [SerializeField] private List<HackableContent> _hackableContents = new List<HackableContent>();
+    [SerializeField] private List<HackableModule> _hackableContents = new List<HackableModule>();
 
-    private HackableContent _lastHoveredContent = null;
+    private HackableModule _lastHoveredContent = null;
     private Queue<GameObject> _availableDrones = new Queue<GameObject>();
 
     public static event System.Action<int> OnAvailableDronesChanged;
@@ -28,18 +27,18 @@ public class HackController : MonoBehaviour
 
     private void OnEnable()
     {
-        HackableContent.OnMEnter += SetHoveredContent;
-        HackableContent.OnMExit += ClearHoveredContent;
-        HackableContent.OnHackComplete += RecoverDrones;
-        HackableContent.OnBreak += RecoverDrones;
+        HackableModule.OnMEnter += SetHoveredContent;
+        HackableModule.OnMExit += ClearHoveredContent;
+        HackableModule.OnHackComplete += RecoverDrones;
+        HackableModule.OnBreak += RecoverDrones;
     }
 
     private void OnDisable()
     {
-        HackableContent.OnMEnter -= SetHoveredContent;
-        HackableContent.OnMExit -= ClearHoveredContent;
-        HackableContent.OnHackComplete -= RecoverDrones;
-        HackableContent.OnBreak -= RecoverDrones;
+        HackableModule.OnMEnter -= SetHoveredContent;
+        HackableModule.OnMExit -= ClearHoveredContent;
+        HackableModule.OnHackComplete -= RecoverDrones;
+        HackableModule.OnBreak -= RecoverDrones;
     }
 
     private void Update()
@@ -68,7 +67,7 @@ public class HackController : MonoBehaviour
         }
     }
 
-    private void SetHoveredContent(HackableContent content)
+    private void SetHoveredContent(HackableModule content)
     {
         if(content != _lastHoveredContent)
         {
@@ -76,7 +75,7 @@ public class HackController : MonoBehaviour
         }
     }
 
-    private void ClearHoveredContent(HackableContent content)
+    private void ClearHoveredContent(HackableModule content)
     {
         if(content == _lastHoveredContent)
         {
@@ -123,7 +122,31 @@ public class HackController : MonoBehaviour
             return;
         }
 
-        int randomID = Random.Range(0, _hackableContents.Count);
-        _hackableContents[randomID].BreakContent();
+        List<HackableModule> validModules = new List<HackableModule>();
+        int currentWantedLevel = 3; // Max level of a skill
+        while(validModules.Count == 0 && currentWantedLevel > 0)
+        {
+            foreach(var module in _hackableContents)
+            {
+                if(module.Skill.Level == currentWantedLevel && !module.NeedsFix)
+                {
+                    validModules.Add(module);
+                }
+            }
+
+            currentWantedLevel--;
+        }
+
+        HackableModule selectedModule = null;
+        if (validModules.Count > 0)
+        {
+            int randomID = Random.Range(0, validModules.Count);
+            selectedModule = validModules[randomID];
+        }
+
+        if (selectedModule != null)
+        {
+            selectedModule.BreakContent();
+        }
     }
 }
