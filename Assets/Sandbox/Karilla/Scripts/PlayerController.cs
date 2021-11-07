@@ -18,10 +18,21 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 mousePos;
 
+
+    private float camHalfHeight;
+    private float camHalfWidth;
+    private float camHalfHeightMax;
+    private float camHalfWidthMax;
+
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
+        //cam = Camera.main;
+
+        camHalfHeight = Camera.main.orthographicSize;
+        camHalfWidth = Camera.main.aspect * camHalfHeight;
+        camHalfHeight = camHalfHeight * .9f;
+        camHalfWidth = camHalfWidth * .9f;
     }
 
     void OnBecameVisible()
@@ -33,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         processInput();
     }
-
+    /*
     void OnBecameInvisible()
     {
         if(cam == null)
@@ -54,7 +65,7 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.position = newPosition;
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -76,6 +87,11 @@ public class PlayerController : MonoBehaviour
     void move()
     {
         rb.velocity = new Vector2(movementDirection.x * movementSpeed, movementDirection.y * movementSpeed);
+        if (transform.position.x < -camHalfHeight)
+        {
+            transform.position.x = camHalfHeight;
+        }
+
     }
 
     float getAngleMouse()
