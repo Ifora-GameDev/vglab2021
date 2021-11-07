@@ -82,43 +82,7 @@ namespace Teist
                     }
                 }
             }
-            /*
-            if (waves[waveIndex].isTimed == false)
-            {
-                if (enemiesAlive <= 0)
-                {
-                    if (waveIndex < waves.Length-1)
-                    {
-                        OnWaveEnd?.Invoke(waveIndex);
-                        waveIndex++;
-                        StartCoroutine(SpawnWave());
-                    }
-                }
-            }
 
-            else
-            {
-                if (waveCooldown >= waves[waveIndex].timeNextWave)
-                {
-                    waveCooldown = 0f;
-                
-                    if (waveIndex < waves.Length-1)
-                    {
-                        OnWaveEnd?.Invoke(waveIndex);
-                        waveIndex++;
-                        StartCoroutine(SpawnWave());
-                    }
-                }
-            
-            }
-            */
-
-            /*
-            if (isWaveFinished && waveIndex >= waves.Length && enemiesAlive<=0)
-            {
-                isGameOver = true;
-                Debug.Log("game over, you win");
-            }*/
             waveCooldown += Time.deltaTime;
         }
 
@@ -128,27 +92,24 @@ namespace Teist
             Debug.Log("spawning wave " + waveIndex);
             Wave wave = waves[waveIndex];
 
-
-            //A MODIFIER SI ON VEUT POUVOIR CHANGER LE PATTERN EN FONCTION DE LA DIRECTION
-            //VOIR AVEC WAVE
-            //Check to stay in screen
+            //Check to place alert signal
             if (wave.path.points[0].position.x < -camHalfWidth)
             {
-                spawnPoint.position = new Vector2(-camHalfWidth, 0);
+                spawnPoint.position = new Vector2(-camHalfWidth * .9f, 0);
 
             }
             if (wave.path.points[0].position.x > camHalfWidth)
             {
-                spawnPoint.position = new Vector2(camHalfWidth, 0);
+                spawnPoint.position = new Vector2(camHalfWidth*.9f, 0);
             }
 
             if (wave.path.points[0].position.y < -camHalfHeight)
             {
-                spawnPoint.position = new Vector2(0, -camHalfHeight);
+                spawnPoint.position = new Vector2(0, -camHalfHeight * .9f);
             }
             if (wave.path.points[0].position.y > camHalfHeight)
             {
-                 spawnPoint.position = new Vector2(0, camHalfHeight);
+                 spawnPoint.position = new Vector2(0, camHalfHeight * .9f);
             }
             foreach (GameObject enemy in wave.enemies)
             {

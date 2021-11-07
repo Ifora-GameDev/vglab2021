@@ -7,7 +7,7 @@ namespace Teist
 {
     public class Enemy : MonoBehaviour
     {
-        //[SerializeField] private GameObject player;
+        private GameObject player;
         [SerializeField] private GameObject bullet;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private int life = 2;
@@ -22,10 +22,10 @@ namespace Teist
         [SerializeField] private int color;
 
         [SerializeField] private float moveSpeed;
-        [SerializeField] private float distanceFromWaypoint=0.5f;
+        [SerializeField] private float distanceFromWaypoint = 0.5f;
         [SerializeField] private float fireRate;
         [SerializeField] private bool isLerp;
-        
+
 
         private float attackCooldown = 0f; //cooldown
 
@@ -56,6 +56,7 @@ namespace Teist
 
         void Start()
         {
+            player = GameObject.Find("Player 1");
             target = path.points[waypointIndex];
 
             startTime = Time.time;
@@ -68,6 +69,7 @@ namespace Teist
 
             //Look();
 
+            if (player == null) return;
             //distance = Vector3.Distance(player.transform.position, transform.position);
             if (attackCooldown <= 0f)
             {
@@ -85,6 +87,7 @@ namespace Teist
             }
             else
             {
+                Look(player.transform);
                 Move();
             }
 
@@ -110,13 +113,16 @@ namespace Teist
 
         private void Move()
         {
-            transform.position += transform.up * moveSpeed;
+            //transform.position += transform.up * moveSpeed;
+
+            Vector3 dir = target.position - transform.position;
+            transform.Translate(dir.normalized * moveSpeed * Time.deltaTime, Space.World);
 
             if (Vector3.Distance(transform.position, target.position) <= distanceFromWaypoint)
             {
                 GetNextWaypoint();
             }
-            Look(target);
+            //Look(target);
         }
 
         private void MoveLerp()
@@ -124,14 +130,14 @@ namespace Teist
             float distCovered = (Time.time - startTime * lerpSpeed);
             float fractionOfJourney = (Time.time - startTime) * lerpSpeed;
 
-            transform.position =Vector3.Lerp(path.points[waypointIndex-1].position, target.position, fractionOfJourney);
+            transform.position = Vector3.Lerp(path.points[waypointIndex - 1].position, target.position, fractionOfJourney);
 
             if (Vector3.Distance(transform.position, target.position) <= distanceFromWaypoint)
             {
                 GetNextWaypoint();
             }
 
-            Look(target);
+            //Look(target);
         }
 
 
