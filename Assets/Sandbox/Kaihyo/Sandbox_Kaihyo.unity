@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 103394600}
   - component: {fileID: 103394602}
   - component: {fileID: 103394601}
+  - component: {fileID: 103394603}
   m_Layer: 5
   m_Name: SkillToken (6)
   m_TagString: Untagged
@@ -198,6 +199,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103394599}
   m_CullTransparentMesh: 1
+--- !u!114 &103394603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103394599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &116700495
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +223,7 @@ GameObject:
   - component: {fileID: 116700496}
   - component: {fileID: 116700498}
   - component: {fileID: 116700497}
+  - component: {fileID: 116700499}
   m_Layer: 5
   m_Name: SkillToken (2)
   m_TagString: Untagged
@@ -273,6 +288,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116700495}
   m_CullTransparentMesh: 1
+--- !u!114 &116700499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116700495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &170817762
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +628,7 @@ GameObject:
   - component: {fileID: 332841812}
   - component: {fileID: 332841814}
   - component: {fileID: 332841813}
+  - component: {fileID: 332841815}
   m_Layer: 5
   m_Name: SkillToken (3)
   m_TagString: Untagged
@@ -664,6 +693,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332841811}
   m_CullTransparentMesh: 1
+--- !u!114 &332841815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332841811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &346615480
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +998,7 @@ Transform:
   - {fileID: 346615483}
   - {fileID: 480297353}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &419525067
 GameObject:
@@ -1502,6 +1544,63 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &532042558
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 718744526}
+    m_Modifications:
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263472897386708239, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+      propertyPath: m_Name
+      value: PH_GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
 --- !u!1 &537675353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,6 +1727,7 @@ GameObject:
   - component: {fileID: 689708414}
   - component: {fileID: 689708416}
   - component: {fileID: 689708415}
+  - component: {fileID: 689708417}
   m_Layer: 5
   m_Name: SkillToken (1)
   m_TagString: Untagged
@@ -1692,6 +1792,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689708413}
   m_CullTransparentMesh: 1
+--- !u!114 &689708417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689708413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &694801647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,15 +2040,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718744525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: 0}
+  m_LocalPosition: {x: -200, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1262922039}
   - {fileID: 525019798}
   - {fileID: 1220474292}
-  - {fileID: 835183455}
+  - {fileID: 902512515}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721458441
 GameObject:
@@ -2190,6 +2303,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1522171754}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &780932364
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2278,7 +2406,7 @@ GameObject:
   - component: {fileID: 820437574}
   - component: {fileID: 820437573}
   m_Layer: 5
-  m_Name: RocketText
+  m_Name: BombText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2402,11 +2530,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820437571}
   m_CullTransparentMesh: 1
---- !u!4 &835183455 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-  m_PrefabInstance: {fileID: 3178618317621912870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &880376263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2532,6 +2655,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886040804}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &902512515 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6997335193243357446, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
+  m_PrefabInstance: {fileID: 532042558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &902548560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,6 +2806,7 @@ GameObject:
   - component: {fileID: 947223083}
   - component: {fileID: 947223085}
   - component: {fileID: 947223084}
+  - component: {fileID: 947223086}
   m_Layer: 5
   m_Name: SkillToken (5)
   m_TagString: Untagged
@@ -2742,6 +2871,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947223082}
   m_CullTransparentMesh: 1
+--- !u!114 &947223086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947223082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &995319412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3110,8 +3252,8 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_StartCorner: 0
-  m_StartAxis: 1
+  m_StartCorner: 2
+  m_StartAxis: 0
   m_CellSize: {x: 35, y: 35}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
@@ -3254,6 +3396,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 103394603}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1097750399
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3613,6 +3770,7 @@ GameObject:
   - component: {fileID: 1220474295}
   - component: {fileID: 1220474294}
   - component: {fileID: 1220474293}
+  - component: {fileID: 1220474296}
   m_Layer: 5
   m_Name: Hud
   m_TagString: Untagged
@@ -3703,6 +3861,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1220474296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220474291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7d0c0a3519b274aabdd82e7c746cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 995319414}
+  _rocketText: {fileID: 260441809}
+  _bombText: {fileID: 820437573}
 --- !u!1 &1262922036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,6 +4056,7 @@ GameObject:
   - component: {fileID: 1310493177}
   - component: {fileID: 1310493179}
   - component: {fileID: 1310493178}
+  - component: {fileID: 1310493180}
   m_Layer: 5
   m_Name: SkillToken (8)
   m_TagString: Untagged
@@ -3947,6 +4121,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310493176}
   m_CullTransparentMesh: 1
+--- !u!114 &1310493180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310493176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &1336593281
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,6 +4365,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1471444052}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1448065918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4349,11 +4551,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451339221}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1467477609 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6588786026617034233, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-  m_PrefabInstance: {fileID: 3178618317621912870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1471444048
 GameObject:
   m_ObjectHideFlags: 0
@@ -4365,6 +4562,7 @@ GameObject:
   - component: {fileID: 1471444049}
   - component: {fileID: 1471444051}
   - component: {fileID: 1471444050}
+  - component: {fileID: 1471444052}
   m_Layer: 5
   m_Name: SkillToken
   m_TagString: Untagged
@@ -4429,6 +4627,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471444048}
   m_CullTransparentMesh: 1
+--- !u!114 &1471444052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471444048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &1475965508
 GameObject:
   m_ObjectHideFlags: 0
@@ -4472,6 +4683,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 116700499}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1475965510
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4591,6 +4817,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1310493180}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1502251965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4813,6 +5054,7 @@ GameObject:
   - component: {fileID: 1511467260}
   - component: {fileID: 1511467262}
   - component: {fileID: 1511467261}
+  - component: {fileID: 1511467263}
   m_Layer: 5
   m_Name: SkillToken (4)
   m_TagString: Untagged
@@ -4877,6 +5119,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511467259}
   m_CullTransparentMesh: 1
+--- !u!114 &1511467263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511467259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &1522171750
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,6 +5143,7 @@ GameObject:
   - component: {fileID: 1522171751}
   - component: {fileID: 1522171753}
   - component: {fileID: 1522171752}
+  - component: {fileID: 1522171754}
   m_Layer: 5
   m_Name: SkillToken (7)
   m_TagString: Untagged
@@ -4952,6 +5208,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522171750}
   m_CullTransparentMesh: 1
+--- !u!114 &1522171754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522171750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41520665f8bab6640ada756f23732088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorPalette: {fileID: 11400000, guid: 6320898dfc922da439440a7a136c8f52, type: 2}
 --- !u!1 &1555652917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,6 +5264,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 332841815}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1555652919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5114,6 +5398,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 947223086}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1636788884
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5219,6 +5518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495bdc79e6f2d5b49b49287dcc9fe9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 346615482}
   _startingDroneAmount: 3
   _dronePrefab: {fileID: 8401302644159812778, guid: 31135da8dc0766e44961f2a4970418d5, type: 3}
   _hackableContents:
@@ -5288,6 +5588,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 689708417}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &1688145816
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5931,6 +6246,21 @@ MonoBehaviour:
   _hackedTint: {r: 0, g: 1, b: 0, a: 1}
   _hoverTint: {r: 0, g: 0, b: 1, a: 1}
   _brokenTint: {r: 1, g: 0, b: 0, a: 1}
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1511467263}
+        m_TargetAssemblyTypeName: SkillTokenController, Assembly-CSharp
+        m_MethodName: ChangeState
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &2012370426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6071,102 +6401,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3178618317621912870
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 718744526}
-    m_Modifications:
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketLevel1
-      value: 
-      objectReference: {fileID: 1448065917}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketLevel2
-      value: 
-      objectReference: {fileID: 1555652918}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketLevel3
-      value: 
-      objectReference: {fileID: 1097750398}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketOrigin
-      value: 
-      objectReference: {fileID: 1467477609}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketPrefab
-      value: 
-      objectReference: {fileID: 3018056878236931634, guid: d40f5fdec7fa9ab4abe4c25a1763728a, type: 3}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _rocketFireRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2752401785571971454, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: _upgradedMaxRocketAmount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061008905954295198, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832194, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832198, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832199, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588786024627832252, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7446cd2d52b1dfa40b6bc0d5a627ab9d, type: 3}

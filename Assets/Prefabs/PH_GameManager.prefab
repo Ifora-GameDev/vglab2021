@@ -74,8 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77704ad9d8826fa41816c0b0d1d5f3ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
-  _enemiesAlive: 0
+  enemiesAlive: 0
   waves:
   - enemies:
     - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
@@ -84,9 +83,9 @@ MonoBehaviour:
     - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
     - {fileID: 4741429041328037285, guid: cc9c6273c47194c479172871dcfe143e, type: 3}
     rate: 2
-    spawnRight: 0
-    spawnLeft: 0
-    spawnTop: 0
-    spawnBottom: 0
+    path: {fileID: 0}
+    isLerp: 0
+    isTimed: 0
+    timeNextWave: 10
   spawnPoint: {fileID: 283807025270609204}
-  player: {fileID: 6454573960111179856, guid: 1efe3432957dc3a499ba38f601918107, type: 3}
+  vfxWarning: {fileID: 0}

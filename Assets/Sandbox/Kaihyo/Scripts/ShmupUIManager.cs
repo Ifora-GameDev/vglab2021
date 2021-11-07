@@ -9,14 +9,33 @@ public class ShmupUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _rocketText;
     [SerializeField] private TextMeshProUGUI _bombText;
 
+    private Canvas _canvas = null;
+
+    private void Awake()
+    {
+        _canvas = GetComponent<Canvas>();
+    }
+
     private void OnEnable()
     {
         PlayerSkillsController.OnRocketCountChanged += UpdateRocketText;
+        Teist.GameManager.OnWaveEnd += HandleWaveEnd;
     }
 
     private void OnDisable()
     {
         PlayerSkillsController.OnRocketCountChanged -= UpdateRocketText;
+        Teist.GameManager.OnWaveEnd -= HandleWaveEnd;
+    }
+
+    private void HandleWaveEnd(int _)
+    {
+        SetHUDVisible(false);
+    }
+
+    private void SetHUDVisible(bool isVisible)
+    {
+        _canvas.enabled = isVisible;
     }
 
     private void UpdateScoreText(int value)

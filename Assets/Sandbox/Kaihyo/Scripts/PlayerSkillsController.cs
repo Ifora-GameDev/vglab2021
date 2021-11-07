@@ -38,7 +38,7 @@ public class PlayerSkillsController : MonoBehaviour
             }
             else
             {
-                amount = 10; // DEBUG, REMETTE A 0
+                amount = 10; // DEBUG, REMETTRE A 0
             }
 
             return amount;

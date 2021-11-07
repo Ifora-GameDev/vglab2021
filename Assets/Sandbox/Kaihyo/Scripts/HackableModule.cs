@@ -41,15 +41,13 @@ public class HackableModule : MonoBehaviour
 
     private void OnEnable()
     {
-        // DEBUG
-        HackController.OnWaveEnd += ProcessHack;
+        Teist.GameManager.OnWaveEnd += ProcessHack;
         Skill.OnActiveStateChange += TryUnlock;
     }
 
     private void OnDisable()
     {
-        // DEBUG
-        HackController.OnWaveEnd -= ProcessHack;
+        Teist.GameManager.OnWaveEnd += ProcessHack;
         Skill.OnActiveStateChange -= TryUnlock;
     }
 
@@ -114,7 +112,7 @@ public class HackableModule : MonoBehaviour
         hackingUnit.transform.position = transform.position + new Vector3(0, 0.75f, 0) * _hackingUnits.Count;
     }
 
-    private void ProcessHack()
+    private void ProcessHack(int _)
     {
         if(!_isBeingHacked)
         {

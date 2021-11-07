@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7c7a75229f8034c8962d6cd1c330d9, type: 3}
   m_Name: DefaultSkillColors
   m_EditorClassIdentifier: 
-  availableColor: {r: 1, g: 1, b: 1, a: 0}
+  availableColor: {r: 1, g: 1, b: 1, a: 1}
   unavalaibleColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  hackedColor: {r: 0, g: 1, b: 0.11449838, a: 0}
-  brokenColor: {r: 1, g: 0, b: 0, a: 0}
+  hackedColor: {r: 0, g: 1, b: 0.11449838, a: 1}
+  brokenColor: {r: 1, g: 0, b: 0, a: 1}

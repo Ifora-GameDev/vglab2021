@@ -1,19 +1,23 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HackController : MonoBehaviour
 {
+    [SerializeField] private Camera _camera = null;
+    [SerializeField] private float _hackDuration = 15f;
     [SerializeField] private int _startingDroneAmount = 3;
     [SerializeField] private GameObject _dronePrefab = null;
     [SerializeField] private List<HackableModule> _hackableContents = new List<HackableModule>();
 
     private HackableModule _lastHoveredContent = null;
     private Queue<GameObject> _availableDrones = new Queue<GameObject>();
+    private Coroutine _timerCoroutine = null;
+    private float _elapsedTime = 0f;
 
-    public static event System.Action<int> OnAvailableDronesChanged;
-
-    // DEBUG
-    public static event System.Action OnWaveEnd;
+    public static event System.Action OnHackEnd;
+    public static event System.Action<int> OnDronesCountChanged;
+    public static event System.Action<int> OnRemainingTimeChanged;
 
     private void Start()
     {
@@ -23,10 +27,14 @@ public class HackController : MonoBehaviour
             drone.SetActive(false);
             _availableDrones.Enqueue(drone);
         }
+
+        OnDronesCountChanged?.Invoke(_availableDrones.Count);
     }
 
     private void OnEnable()
     {
+        Teist.GameManager.OnWaveEnd += HandleWaveEnd;
+
         HackableModule.OnMEnter += SetHoveredContent;
         HackableModule.OnMExit += ClearHoveredContent;
         HackableModule.OnHackComplete += RecoverDrones;
@@ -35,6 +43,8 @@ public class HackController : MonoBehaviour
 
     private void OnDisable()
     {
+        Teist.GameManager.OnWaveEnd -= HandleWaveEnd;
+
         HackableModule.OnMEnter -= SetHoveredContent;
         HackableModule.OnMExit -= ClearHoveredContent;
         HackableModule.OnHackComplete -= RecoverDrones;
@@ -56,10 +66,6 @@ public class HackController : MonoBehaviour
         }
 
         // DEBUG
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            OnWaveEnd?.Invoke();
-        }
 
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -67,68 +73,35 @@ public class HackController : MonoBehaviour
         }
     }
 
-    private void SetHoveredContent(HackableModule content)
+    private void HandleWaveEnd(int _)
     {
-        if(content != _lastHoveredContent)
+        if (_timerCoroutine == null)
         {
-            _lastHoveredContent = content;
-        }
-    }
-
-    private void ClearHoveredContent(HackableModule content)
-    {
-        if(content == _lastHoveredContent)
-        {
-            _lastHoveredContent = null;
-        }
-    }
-
-    private void TryHack()
-    {
-        if(_availableDrones.Count == 0)
-        {
-            return;
+            _timerCoroutine = StartCoroutine(HackTimer());
         }
 
-        var drone = _availableDrones.Dequeue();
-        _lastHoveredContent.StartHack(drone);
-
-        OnAvailableDronesChanged?.Invoke(_availableDrones.Count);
+        SetHackViewVisible(true);
     }
 
-    private void TryRepair()
+    private void SetHackViewVisible(bool isVisible)
     {
-        // Si on n'a pas l'argent, on ne répare pas
-
-        _lastHoveredContent.FixContent();
-    }
-
-    private void RecoverDrones(Queue<GameObject> recoveredDrones)
-    {
-        while(recoveredDrones.Count > 0)
-        {
-            var drone = recoveredDrones.Dequeue();
-            drone.SetActive(false);
-            _availableDrones.Enqueue(drone);
-        }
-
-        OnAvailableDronesChanged?.Invoke(_availableDrones.Count);
+        _camera.gameObject.SetActive(isVisible);
     }
 
     private void BreakHackableContent()
     {
-        if(_hackableContents.Count == 0)
+        if (_hackableContents.Count == 0)
         {
             return;
         }
 
         List<HackableModule> validModules = new List<HackableModule>();
         int currentWantedLevel = 3; // Max level of a skill
-        while(validModules.Count == 0 && currentWantedLevel > 0)
+        while (validModules.Count == 0 && currentWantedLevel > 0)
         {
-            foreach(var module in _hackableContents)
+            foreach (var module in _hackableContents)
             {
-                if(module.Skill.Level == currentWantedLevel && !module.NeedsFix)
+                if (module.Skill.Level == currentWantedLevel && !module.NeedsFix)
                 {
                     validModules.Add(module);
                 }
@@ -148,5 +121,73 @@ public class HackController : MonoBehaviour
         {
             selectedModule.BreakContent();
         }
+    }
+
+    private void SetHoveredContent(HackableModule content)
+    {
+        if(content != _lastHoveredContent)
+        {
+            _lastHoveredContent = content;
+        }
+    }
+
+    private void ClearHoveredContent(HackableModule content)
+    {
+        if(content == _lastHoveredContent)
+        {
+            _lastHoveredContent = null;
+        }
+    } 
+
+    private void TryHack()
+    {
+        if(_availableDrones.Count == 0)
+        {
+            return;
+        }
+
+        var drone = _availableDrones.Dequeue();
+        _lastHoveredContent.StartHack(drone);
+
+        OnDronesCountChanged?.Invoke(_availableDrones.Count);
+    }
+
+    private void TryRepair()
+    {
+        // Si on n'a pas l'argent, on ne répare pas
+
+        _lastHoveredContent.FixContent();
+    }
+
+    private void RecoverDrones(Queue<GameObject> recoveredDrones)
+    {
+        while(recoveredDrones.Count > 0)
+        {
+            var drone = recoveredDrones.Dequeue();
+            drone.SetActive(false);
+            _availableDrones.Enqueue(drone);
+        }
+
+        OnDronesCountChanged?.Invoke(_availableDrones.Count);
+    }
+
+    private IEnumerator HackTimer()
+    {
+        _elapsedTime = 0f;
+        
+        while(_elapsedTime < _hackDuration)
+        {
+            _elapsedTime += Time.deltaTime;
+
+            int remainingTime = (int)_hackDuration - (int)_elapsedTime;
+            OnRemainingTimeChanged?.Invoke(remainingTime);
+            
+            yield return null;
+        }
+
+        OnHackEnd?.Invoke();
+        SetHackViewVisible(false);
+
+        _timerCoroutine = null;
     }
 }
