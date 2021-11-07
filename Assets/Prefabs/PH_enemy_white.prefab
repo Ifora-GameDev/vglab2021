@@ -162,3 +162,5 @@ MonoBehaviour:
   moveSpeed: 0.003
   distanceFromWaypoint: 0.5
   fireRate: 1
+  isLerp: 0
+  lerpSpeed: 0.8
