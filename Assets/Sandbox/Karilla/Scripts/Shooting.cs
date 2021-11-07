@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public Transform firePoint;
+    public Transform[] firePoint;
+
+    public int nbShot;
 
     public GameObject[] bulletObj;
 
@@ -39,14 +41,20 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
+        
         if (Time.time >= _nextFireTime)
         {
-            GameObject bullet = Instantiate(bulletObj[color], firePoint.position, firePoint.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+            
+            for(int i = 0; i < nbShot; i++)
+            {
+                GameObject bullet = Instantiate(bulletObj[color], firePoint[i].position, firePoint[i].rotation);
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                rb.AddForce(firePoint[i].up * bulletForce, ForceMode2D.Impulse);
+            }
 
             _nextFireTime = Time.time + 1 / _fireRate;
         }
+        
     }
     void ChangeColor()
     {
