@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     void processInput()
     {
-        if(!_areInputsEnable)
+        if(_areInputsEnable==false)
         {
             rb.velocity = new Vector2(0, 0);
             return;
