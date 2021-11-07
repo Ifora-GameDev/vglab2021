@@ -7,7 +7,8 @@ namespace Teist
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] public static int money;
+        private static int money;
+
         [SerializeField] private int enemiesAlive = 0;
 
         public Wave[] waves;
@@ -29,8 +30,15 @@ namespace Teist
         
         public static event Action<int> OnWaveEnd;
         public static event Action OnGameWin;
+        public static event Action<int> OnMoneyValueChanged;
 
         [SerializeField] private GameObject vfxWarning;
+
+        public static int Money
+        {
+            get { return money; }
+            set { SetMoney(value); }
+        }
 
         private void OnEnable()
         {
@@ -45,6 +53,8 @@ namespace Teist
 
         private void Start()
         {
+            SetMoney(0);
+
             waveCooldown = 0f;
             spawnPoint.position = new Vector3(0, 0, 0);
 
@@ -158,10 +168,16 @@ namespace Teist
         }
 
 
+        private static void SetMoney(int value)
+        {
+            money = value;
+            OnMoneyValueChanged?.Invoke(money);
+        }
+
         //Event send when an enemy die, containing money reward information
         private void Enemy_OnEnDie(int reward)
         {
-            money += reward;
+            SetMoney(money + reward);
             enemiesAlive--;
             if (enemiesAlive < 0)
             {

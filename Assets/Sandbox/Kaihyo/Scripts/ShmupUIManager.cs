@@ -8,6 +8,7 @@ public class ShmupUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _rocketText;
     [SerializeField] private TextMeshProUGUI _bombText;
+    [SerializeField] private List<GameObject> _hideableContent = new List<GameObject>();
 
     private Canvas _canvas = null;
 
@@ -19,14 +20,18 @@ public class ShmupUIManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerSkillsController.OnRocketCountChanged += UpdateRocketText;
+        PlayerSkillsController.OnBombEnergyAmountChanged += UpdateBombText;
         Teist.GameManager.OnWaveEnd += HandleWaveEnd;
+        Teist.GameManager.OnMoneyValueChanged += UpdateScoreText;
         HackController.OnHackEnd += HandleHackEnd;
     }
 
     private void OnDisable()
     {
         PlayerSkillsController.OnRocketCountChanged -= UpdateRocketText;
+        PlayerSkillsController.OnBombEnergyAmountChanged -= UpdateBombText;
         Teist.GameManager.OnWaveEnd -= HandleWaveEnd;
+        Teist.GameManager.OnMoneyValueChanged -= UpdateScoreText;
         HackController.OnHackEnd -= HandleHackEnd;
     }
 
@@ -42,7 +47,10 @@ public class ShmupUIManager : MonoBehaviour
 
     private void SetHUDVisible(bool isVisible)
     {
-        _canvas.enabled = isVisible;
+        foreach(var content in _hideableContent)
+        {
+            content.SetActive(isVisible);
+        }
     }
 
     private void UpdateScoreText(int value)
@@ -57,6 +65,6 @@ public class ShmupUIManager : MonoBehaviour
 
     private void UpdateBombText(int value)
     {
-        _bombText.text = value.ToString();
+        _bombText.text = value.ToString() + "%";
     }
 }

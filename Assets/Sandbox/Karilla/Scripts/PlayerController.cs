@@ -24,6 +24,22 @@ public class PlayerController : MonoBehaviour
     private float camHalfHeightMax;
     private float camHalfWidthMax;
 
+    private bool _areInputsEnable = true;
+
+    private void OnEnable()
+    {
+        Teist.GameManager.OnWaveEnd += ToggleInputsActive;
+        Teist.GameManager.OnGameWin += ToggleInputsActive;
+        HackController.OnHackEnd += ToggleInputsActive;
+    }
+
+    private void OnDisable()
+    {
+        Teist.GameManager.OnWaveEnd -= ToggleInputsActive;
+        Teist.GameManager.OnGameWin -= ToggleInputsActive;
+        HackController.OnHackEnd -= ToggleInputsActive;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         processInput();
     }
+
     /*
     void OnBecameInvisible()
     {
@@ -73,8 +90,23 @@ public class PlayerController : MonoBehaviour
         rotate();
     }
 
+    private void ToggleInputsActive()
+    {
+        _areInputsEnable = !_areInputsEnable;
+    }
+
+    private void ToggleInputsActive(int _)
+    {
+        _areInputsEnable = !_areInputsEnable;
+    }
+
     void processInput()
     {
+        if(!_areInputsEnable)
+        {
+            return;
+        }
+
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
