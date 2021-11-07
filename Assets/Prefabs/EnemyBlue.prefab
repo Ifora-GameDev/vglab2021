@@ -284,9 +284,9 @@ MonoBehaviour:
   bullet: {fileID: 5121624245532554275, guid: 9c862bfb10cb5984d9114a773473cbaa, type: 3}
   spawnPoint: {fileID: 7950183793525956501}
   life: 2
-  reward: 10
+  reward: 50
   color: 1
-  moveSpeed: 0.003
+  moveSpeed: 0.008
   distanceFromWaypoint: 0.5
   fireRate: 2
   isLerp: 0
