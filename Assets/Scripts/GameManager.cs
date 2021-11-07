@@ -44,6 +44,7 @@ namespace Teist
         {
             Enemy.OnEnDie += Enemy_OnEnDie;
             HackController.OnHackEnd += StartNextWave;
+            PlayerManager.OnPlayerDie+=YouLost;
         }
 
         private void OnDisable()
@@ -151,20 +152,20 @@ namespace Teist
             {
 
                 //yield return new WaitForSeconds(2f);
-                yield return StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
+                yield return StartCoroutine(SpawnEnemy(enemy,wave.path));
                 yield return new WaitForSeconds(1f / wave.rate);
             }
             isWaveSpawnFinished = true;
         }
 
 
-        IEnumerator SpawnEnemy(GameObject enemy,Waypoints path, bool isLerp)
+        IEnumerator SpawnEnemy(GameObject enemy,Waypoints path)
         {
             Instantiate(vfxWarning, spawnPoint.position, Quaternion.identity);
             yield return new WaitForSeconds(2f);
             enemiesAlive++;
             GameObject e = Instantiate(enemy, path.points[0].transform.position, Quaternion.identity);
-            e.GetComponent<Enemy>().Init(path,isLerp);
+            e.GetComponent<Enemy>().Init(path);
         }
 
 
@@ -184,6 +185,13 @@ namespace Teist
                 Debug.LogWarning("enemies alive shouldn't be negative");
                 enemiesAlive = 0;
             }
+        }
+
+        private void YouLost()
+        {
+            //The game is over
+            Time.timeScale = 0f;
+            Debug.Log("FINI");
         }
     }
 }

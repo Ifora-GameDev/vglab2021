@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -14,15 +12,11 @@ public class PlayerController : MonoBehaviour
 
     private Camera cam;
 
-    private Vector3 viewportPosition;
-
     private Vector2 mousePos;
 
 
     private float camHalfHeight;
     private float camHalfWidth;
-    private float camHalfHeightMax;
-    private float camHalfWidthMax;
 
     private bool _areInputsEnable = true;
 
@@ -51,38 +45,11 @@ public class PlayerController : MonoBehaviour
         camHalfWidth = camHalfWidth * .9f;
     }
 
-    void OnBecameVisible()
-    {
-    
-    }
 
     void Update()
     {
         processInput();
     }
-
-    /*
-    void OnBecameInvisible()
-    {
-        if(cam == null)
-        {
-            return;
-        }
-        viewportPosition = cam.WorldToViewportPoint(transform.position);
-        Vector3 newPosition = transform.position;
-
-        if (viewportPosition.x > 1 || viewportPosition.x < 0)
-        {
-            newPosition.x = -newPosition.x;
-        }
-
-        if (viewportPosition.y > 1 || viewportPosition.y < 0)
-        {
-            newPosition.y = -newPosition.y;
-        }
-
-        transform.position = newPosition;
-    }*/
 
     private void FixedUpdate()
     {

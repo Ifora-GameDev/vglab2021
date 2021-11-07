@@ -14,18 +14,6 @@ public class BulletController : MonoBehaviour
     [SerializeField] private int color;
     // Start is called before the first frame update
 
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
         //If the bullet collide with the player, he takes damage

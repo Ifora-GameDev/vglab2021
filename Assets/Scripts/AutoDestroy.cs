@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class AutoDestroy : MonoBehaviour
 {
-    [SerializeField] private float timeBeforeAutoDestruction=1f;
+    [SerializeField] private float timeBeforeAutoDestruction=2f;
     void Start()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, timeBeforeAutoDestruction);
     }
 }

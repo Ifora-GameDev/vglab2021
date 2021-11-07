@@ -35,17 +35,10 @@ namespace Teist
         [SerializeField] private float moveSpeed;
         [SerializeField] private float distanceFromWaypoint = 0.5f;
         [SerializeField] private float fireRate;
-        [SerializeField] private bool isLerp;
 
 
         private float attackCooldown = 0f; //cooldown
 
-        /*
-        private float camHalfHeight;
-        private float camHalfWidth;
-        private float camHalfHeightMax;
-        private float camHalfWidthMax;
-        */
         private Waypoints path;
         private Transform target;
         //The first waypoint is the start position
@@ -55,12 +48,6 @@ namespace Teist
 
         // Movement speed in units per second.
         public float lerpSpeed = .9f;
-
-        // Time when the movement started.
-        private float startTime;
-
-        // Total distance between the markers.
-        private float journeyLength;
 
 
         public static event Action<int> OnEnDie;
@@ -73,9 +60,6 @@ namespace Teist
             collisionneur = GetComponent<Collider2D>();
             player = GameObject.Find("Player 1");
             target = path.points[waypointIndex];
-
-            startTime = Time.time;
-            journeyLength = Vector3.Distance(path.points[0].position, target.position);
         }
 
         // Update is called once per frame
@@ -86,7 +70,6 @@ namespace Teist
             //Look();
 
             if (player == null) return;
-            //distance = Vector3.Distance(player.transform.position, transform.position);
             if (attackCooldown <= 0f)
             {
                 //On tire
@@ -97,15 +80,8 @@ namespace Teist
                 //aka fireRate=2 donc fireCtdw=1/2=.5s
             }
 
-            if (isLerp)
-            {
-                MoveLerp();
-            }
-            else
-            {
                 Look(player.transform);
                 Move();
-            }
 
             attackCooldown -= Time.deltaTime;
         }
@@ -141,22 +117,6 @@ namespace Teist
             //Look(target);
         }
 
-        private void MoveLerp()
-        {
-            float distCovered = (Time.time - startTime * lerpSpeed);
-            float fractionOfJourney = (Time.time - startTime) * lerpSpeed;
-
-            transform.position = Vector3.Lerp(path.points[waypointIndex - 1].position, target.position, fractionOfJourney);
-
-            if (Vector3.Distance(transform.position, target.position) <= distanceFromWaypoint)
-            {
-                GetNextWaypoint();
-            }
-
-            //Look(target);
-        }
-
-
         private void GetNextWaypoint()
         {
             if (waypointIndex >= path.points.Length - 1)
@@ -169,17 +129,13 @@ namespace Teist
             {
                 waypointIndex++;
                 target = path.points[waypointIndex];
-
-                startTime = Time.time;
-                journeyLength = Vector3.Distance(path.points[waypointIndex - 1].position, target.position);
             }
             Look(target);
 
         }
 
-        public void Init(Waypoints p, bool lerp)
+        public void Init(Waypoints p)
         {
-            isLerp = lerp;
             path = p;
         }
 
