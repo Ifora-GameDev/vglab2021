@@ -7,11 +7,19 @@ namespace Teist
 {
     public class Enemy : MonoBehaviour
     {
+
+
         private GameObject player;
         [SerializeField] private GameObject bullet;
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private int life = 2;
         [SerializeField] private int reward = 10;
+        [SerializeField] private Renderer rend;
+        [SerializeField] private Renderer[] rendInChilds;
+        [SerializeField] private Collider2D collisionneur;
+
+        [SerializeField] private AudioClip sfxExplode;
+        private AudioSource aSource;
 
 
         /*
@@ -56,6 +64,9 @@ namespace Teist
 
         void Start()
         {
+            aSource = GetComponent<AudioSource>();
+            //rend = GetComponent<Renderer>();
+            collisionneur = GetComponent<Collider2D>();
             player = GameObject.Find("Player 1");
             target = path.points[waypointIndex];
 
@@ -66,6 +77,7 @@ namespace Teist
         // Update is called once per frame
         void Update()
         {
+            if (life <= 0) return;
 
             //Look();
 
@@ -178,9 +190,15 @@ namespace Teist
 
             if (life <= 0)
             {
+                collisionneur.enabled = false;
+                rend.enabled = false;
+                foreach (Renderer r in rendInChilds)
+                {
+                    r.enabled = false;
+                }
+                aSource.PlayOneShot(sfxExplode);
                 OnEnDie?.Invoke(reward);
-
-                Destroy(gameObject);
+                Destroy(gameObject,2f);
             }
         }
     }
