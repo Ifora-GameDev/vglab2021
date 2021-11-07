@@ -369,7 +369,7 @@ MonoBehaviour:
   - {fileID: 6181866715694737258, guid: 4ddd3acf72f899d48a805997900f8725, type: 3}
   - {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
   bulletForce: 20
-  _fireRate: 2
+  _fireRate: 2.5
   baseCanon: {fileID: 2173582988323406323}
   canon: {fileID: 2173582987937944391}
   color: 0
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f6f636a3935da4b82c30b015cd1d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 10
+  explosionRadius: 7
   _fireRate: 1
 --- !u!114 &2173582988622559533
 MonoBehaviour:
