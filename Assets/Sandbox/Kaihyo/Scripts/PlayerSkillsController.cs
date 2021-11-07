@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +20,8 @@ public class PlayerSkillsController : MonoBehaviour
     private int _availableRocketsCount = 0;
     private Queue<GameObject> _rocketsPool = new Queue<GameObject>();
 
+    public static event Action<int> OnRocketCountChanged;
+
     private int MaxRocketAmount
     {
         get
@@ -36,32 +38,22 @@ public class PlayerSkillsController : MonoBehaviour
             }
             else
             {
-                amount = 0; // DEBUG, REMETTE A 0
+                amount = 10; // DEBUG, REMETTE A 0
             }
 
             return amount;
         }
     }
 
-    private void OnEnable()
-    {
-        Rocket.OnRocketDestroyed += RecoverRocket;
-    }
-
-    private void OnDisable()
-    {
-        Rocket.OnRocketDestroyed -= RecoverRocket;
-    }
-
     private void Start()
     {
         CreateRocketPool();
-        _availableRocketsCount = MaxRocketAmount;
+        SetRocketCount(MaxRocketAmount);
     }
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetMouseButton(1))
         {
             FireRocket();
         }
@@ -80,6 +72,12 @@ public class PlayerSkillsController : MonoBehaviour
         }
     }
 
+    private void SetRocketCount(int amount)
+    {
+        _availableRocketsCount = amount;
+        OnRocketCountChanged?.Invoke(_availableRocketsCount);
+    }
+
     private void FireRocket()
     {
         if(_availableRocketsCount <= 0)
@@ -95,13 +93,8 @@ public class PlayerSkillsController : MonoBehaviour
             rocket.transform.up = _rocketOrigin.up;
             rocket.SetActive(true);
 
-            _availableRocketsCount--;
+            SetRocketCount(_availableRocketsCount - 1);
             _nextRocketFireTime = Time.time + 1 / _rocketFireRate;
         }
-    }
-
-    private void RecoverRocket(GameObject rocket)
-    {
-        _rocketsPool.Enqueue(rocket);
     }
 }

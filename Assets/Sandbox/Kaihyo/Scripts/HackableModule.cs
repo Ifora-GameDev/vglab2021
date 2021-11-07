@@ -34,6 +34,8 @@ public class HackableModule : MonoBehaviour
     public static event Action OnSkillUnlocked;
     public static event Action<Queue<GameObject>> OnBreak;
 
+    public UnityEvent<SkillTokenState> OnColorChanged;
+
     public Skill Skill => _skill;
     public bool NeedsFix => _needsFix;
 
@@ -59,23 +61,24 @@ public class HackableModule : MonoBehaviour
 
     private void Start()
     {
-        var tint = DeduceTint();
-        _renderer.material.SetColor("_Color", tint);
+        _renderer.material.SetColor("_Color", DeduceTint());
         _collider.enabled = _skill.IsAvailable;
         _skill.SetActive(false);
     }
 
     private void OnMouseEnter()
     {
-        _renderer.material.SetColor("_Color", _hoverTint);
         OnMEnter?.Invoke(this);
+    }
+
+    private void OnMouseOver()
+    {
+        _renderer.material.SetColor("_Color", _hoverTint);
     }
 
     private void OnMouseExit()
     {
-        var tint = DeduceTint();
-        _renderer.material.SetColor("_Color", tint);
-
+        _renderer.material.SetColor("_Color", DeduceTint());
 
         OnMExit?.Invoke(this);
     }
@@ -83,19 +86,17 @@ public class HackableModule : MonoBehaviour
     public void FixContent()
     {
         _skill.SetActive(_skill.HasBeenActivated);
-        var tint = DeduceTint();
-        _renderer.material.SetColor("_Color", tint);
-
         _needsFix = false;
         _collider.enabled = !_isHacked && _skill.IsAvailable;
+        _renderer.material.SetColor("_Color", DeduceTint());
     }
 
     public void BreakContent()
     {
         _skill.SetActive(false);
-        _renderer.material.SetColor("_Color", _brokenTint);
         _needsFix = true;
         _collider.enabled = true;
+        _renderer.material.SetColor("_Color", DeduceTint());
 
         OnBreak?.Invoke(_hackingUnits);
     }
@@ -150,14 +151,18 @@ public class HackableModule : MonoBehaviour
         if(_needsFix)
         {
             tint = _brokenTint;
+            OnColorChanged?.Invoke(SkillTokenState.Broken);
         }
         else if(_skill.IsAvailable)
         {
             tint = _skill.IsActive ? _hackedTint : _defaultTint;
+            var targetTokenState = _skill.IsActive ? SkillTokenState.Hacked : SkillTokenState.Available;
+            OnColorChanged?.Invoke(targetTokenState);
         }
         else
         {
             tint = _disableTint;
+            OnColorChanged?.Invoke(SkillTokenState.Unavailable);
         }
 
         return tint;

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //cam = Camera.main;
+        cam = Camera.main;
 
         camHalfHeight = Camera.main.orthographicSize;
         camHalfWidth = Camera.main.aspect * camHalfHeight;
