@@ -702,7 +702,7 @@ MonoBehaviour:
   bullet: {fileID: 5121624245532554275, guid: dff898b41e4c2164dae08434d789e807, type: 3}
   spawnPoint: {fileID: 7950183793525956501}
   life: 4
-  reward: 100
+  reward: 75
   rend: {fileID: 8131892414866583259}
   rendInChilds:
   - {fileID: 8131892415217015096}
