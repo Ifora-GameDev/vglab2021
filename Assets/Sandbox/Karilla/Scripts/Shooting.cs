@@ -28,6 +28,33 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
 
     private float _nextFireTime = 0f;
+
+    private void OnEnable()
+    {
+        Teist.GameManager.OnWaveEnd += ToggleInputsActive;
+        Teist.GameManager.OnGameWin += ToggleInputsActive;
+        HackController.OnHackEnd += ToggleInputsActive;
+    }
+
+    private void OnDisable()
+    {
+        Teist.GameManager.OnWaveEnd -= ToggleInputsActive;
+        Teist.GameManager.OnGameWin -= ToggleInputsActive;
+        HackController.OnHackEnd -= ToggleInputsActive;
+    }
+
+    private bool _areInputsEnable = true;
+
+    private void ToggleInputsActive()
+    {
+        _areInputsEnable = !_areInputsEnable;
+    }
+
+    private void ToggleInputsActive(int _)
+    {
+        _areInputsEnable = !_areInputsEnable;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +73,12 @@ public class Shooting : MonoBehaviour
 
     void processInput()
     {
+        if (!_areInputsEnable)
+        {
+            return;
+        }
+
+
         if (Input.GetButton("Fire1")) { Shoot(); };
         if (Input.GetButtonDown("Fire2")) { ChangeColor(); };
     }

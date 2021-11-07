@@ -208,13 +208,15 @@ GameObject:
   - component: {fileID: 2173582988622559538}
   - component: {fileID: 2173582988622559539}
   - component: {fileID: 2173582988622559537}
+  - component: {fileID: 7303291876228809953}
   - component: {fileID: 2173582988622559536}
   - component: {fileID: 2173582988622559535}
   - component: {fileID: 2173582988622559534}
   - component: {fileID: 2173582988622559533}
+  - component: {fileID: 863394287}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 2173582988622559540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4722983053646145314}
   - {fileID: 2173582988323406322}
@@ -307,6 +309,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &7303291876228809953
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173582988622559540}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.74, y: 7}
+    newSize: {x: 3.74, y: 7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.74, y: 7}
+  m_EdgeRadius: 0
 --- !u!114 &2173582988622559536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +399,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa3807e6d4b6d142b4d3f524ab63e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 5
+--- !u!114 &863394287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173582988622559540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a870edcb7d7f65b4596ed507dff611dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rocketLevel1: {fileID: 0}
+  _rocketLevel2: {fileID: 0}
+  _rocketLevel3: {fileID: 0}
+  _rocketPrefab: {fileID: 3018056878236931634, guid: d40f5fdec7fa9ab4abe4c25a1763728a, type: 3}
+  _rocketOrigin: {fileID: 2173582988401624644}
+  _rocketFireRate: 0.5
+  _baseMaxRocketAmount: 5
+  _upgradedMaxRocketAmount: 10
+  _bombLevel1: {fileID: 0}
+  _bombLevel2: {fileID: 0}
+  _bombLevel3: {fileID: 0}
+  _explosionRadius: 10
+  _baseRequiredEnergy: 30
+  _upgradedRequiredEnergy: 15
+  _shootLevel1: {fileID: 0}
+  _shootLevel2: {fileID: 0}
+  _shootLevel3: {fileID: 0}
 --- !u!1 &2173582989575611173
 GameObject:
   m_ObjectHideFlags: 0

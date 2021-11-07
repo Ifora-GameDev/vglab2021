@@ -5,6 +5,7 @@ using UnityEngine;
 public class HackController : MonoBehaviour
 {
     [SerializeField] private Camera _camera = null;
+    [SerializeField] private Texture2D _repairCursorSprite = null;
     [SerializeField] private float _hackDuration = 15f;
     [SerializeField] private int _startingDroneAmount = 3;
     [SerializeField] private GameObject _dronePrefab = null;
@@ -18,6 +19,7 @@ public class HackController : MonoBehaviour
     public static event System.Action OnHackEnd;
     public static event System.Action<int> OnDronesCountChanged;
     public static event System.Action<int> OnRemainingTimeChanged;
+    public static event System.Action<bool> OnShipInDanger;
 
     private void Start()
     {
@@ -37,8 +39,14 @@ public class HackController : MonoBehaviour
 
         HackableModule.OnMEnter += SetHoveredContent;
         HackableModule.OnMExit += ClearHoveredContent;
+        // Cursor management
+        HackableModule.OnMEnter += HandleCursorChange;
+        HackableModule.OnMExit += HandleCursorChange;
+
         HackableModule.OnHackComplete += RecoverDrones;
         HackableModule.OnBreak += RecoverDrones;
+
+        PlayerManager.OnPlayerHit += BreakHackableContent;
     }
 
     private void OnDisable()
@@ -49,6 +57,12 @@ public class HackController : MonoBehaviour
         HackableModule.OnMExit -= ClearHoveredContent;
         HackableModule.OnHackComplete -= RecoverDrones;
         HackableModule.OnBreak -= RecoverDrones;
+
+        // Cursor management
+        HackableModule.OnMEnter -= HandleCursorChange;
+        HackableModule.OnMExit -= HandleCursorChange;
+
+        PlayerManager.OnPlayerHit -= BreakHackableContent;
     }
 
     private void Update()
@@ -70,6 +84,18 @@ public class HackController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             BreakHackableContent();
+        }
+    }
+
+    private void HandleCursorChange(HackableModule _)
+    {
+        if(_lastHoveredContent != null && _lastHoveredContent.NeedsFix)
+        {
+            Cursor.SetCursor(_repairCursorSprite, Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         }
     }
 
@@ -121,6 +147,24 @@ public class HackController : MonoBehaviour
         {
             selectedModule.BreakContent();
         }
+
+        CheckShipEmergency();
+    }
+
+    // the ship is in emergency (last life) if all modules are broken
+    private bool CheckShipEmergency()
+    {
+        foreach (var module in _hackableContents)
+        {
+            if (!module.NeedsFix)
+            {
+                OnShipInDanger?.Invoke(false);
+                return false;
+            }
+        }
+
+        OnShipInDanger?.Invoke(true);
+        return true;
     }
 
     private void SetHoveredContent(HackableModule content)
@@ -154,9 +198,16 @@ public class HackController : MonoBehaviour
 
     private void TryRepair()
     {
-        // Si on n'a pas l'argent, on ne répare pas
+        if(Teist.GameManager.Money < _lastHoveredContent.Skill.RepairingCost)
+        {
+            // Jouer son "reparation impossible"
+            Debug.Log("<color=red>Not enough money to repair !</color>");
+            return;
+        }
 
+        Teist.GameManager.Money -= _lastHoveredContent.Skill.RepairingCost;
         _lastHoveredContent.FixContent();
+        CheckShipEmergency();
     }
 
     private void RecoverDrones(Queue<GameObject> recoveredDrones)
