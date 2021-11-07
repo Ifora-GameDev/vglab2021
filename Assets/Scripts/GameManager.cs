@@ -84,7 +84,7 @@ namespace Teist
             
             }
 
-            if(gameIsLaunched && waveIndex >= waves.Length&&enemiesAlive<=0)
+            if(gameIsLaunched && waveIndex >= waves.Length && enemiesAlive<=0)
             {
                 isGameOver = true;
                 Debug.Log("game over, you win");
@@ -97,6 +97,10 @@ namespace Teist
             //Debug.Log("spawning wave " + waveIndex);
             Wave wave = waves[waveIndex];
 
+
+            //A MODIFIER SI ON VEUT POUVOIR CHANGER LE PATTERN EN FONCTION DE LA DIRECTION
+            //VOIR AVEC WAVE
+            /*
             if(wave.spawnRight)
             {
                 spawnPoint.position = new Vector3(camHalfWidth, 0, 0);
@@ -113,12 +117,12 @@ namespace Teist
             {
                 spawnPoint.position = new Vector3(0, -camHalfHeight,  0);
             }
-
+            */
             foreach (GameObject enemy in wave.enemies)
             {
 
                 yield return new WaitForSeconds(2f);
-                StartCoroutine(SpawnEnemy(enemy,wave.path));
+                StartCoroutine(SpawnEnemy(enemy,wave.path,wave.isLerp));
                 yield return new WaitForSeconds(1f / wave.rate);
             }
 
@@ -126,14 +130,14 @@ namespace Teist
         }
 
 
-        IEnumerator SpawnEnemy(GameObject enemy,Waypoints path)
+        IEnumerator SpawnEnemy(GameObject enemy,Waypoints path, bool isLerp)
         {
             Instantiate(vfxWarning, spawnPoint.position, Quaternion.identity);
             yield return new WaitForSeconds(2f);
             enemiesAlive++;
             gameIsLaunched = true;
             GameObject e = Instantiate(enemy, path.points[0].transform.position, Quaternion.identity);
-            e.GetComponent<Enemy>().SetPath(path);
+            e.GetComponent<Enemy>().Init(path,isLerp);
         }
 
 
