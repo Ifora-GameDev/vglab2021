@@ -144,7 +144,6 @@ namespace Teist
         //Event send when an enemy die, containing money reward information
         private void Enemy_OnEnDie(int reward)
         {
-            Debug.Log(reward);
             money += reward;
             enemiesAlive--;
             if (enemiesAlive < 0)

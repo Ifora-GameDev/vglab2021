@@ -138,9 +138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1061225547891829289}
-  bulletObj: {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
+  bulletObj:
+  - {fileID: 6181866715694737258, guid: 31a259ecf3705784fa092ed4e0479806, type: 3}
+  - {fileID: 6181866715694737258, guid: 4ddd3acf72f899d48a805997900f8725, type: 3}
   bulletForce: 30
   _fireRate: 2
+  color: 0
 --- !u!114 &7895286155525210702
 MonoBehaviour:
   m_ObjectHideFlags: 0
