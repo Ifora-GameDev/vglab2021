@@ -15,6 +15,8 @@ namespace Teist
         [SerializeField] private int life = 2;
         [SerializeField] private int reward = 10;
         [SerializeField] private Renderer rend;
+
+
         [SerializeField] private Renderer[] rendInChilds;
         [SerializeField] private Collider2D collisionneur;
 
