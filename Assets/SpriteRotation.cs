@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpriteRotation : MonoBehaviour
 {
-    [SerializeField] private Transform point;
+    [SerializeField] private bool counterWise;
     private Vector3 axis;
 
 
@@ -14,6 +14,13 @@ public class SpriteRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(point.position, axis, Time.deltaTime * 1000);
+        if (counterWise)
+        {
+            transform.RotateAround(gameObject.transform.position, axis, Time.deltaTime * 700);
+        }
+        else
+        {
+            transform.RotateAround(gameObject.transform.position, axis, Time.deltaTime * -700);
+        }
     }
 }
