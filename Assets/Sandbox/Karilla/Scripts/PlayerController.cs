@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(movementDirection.x * movementSpeed, movementDirection.y * movementSpeed);
         if (transform.position.x < -camHalfHeight)
         {
-            transform.position.x = camHalfHeight;
+            //transform.position.x = camHalfHeight;
         }
 
     }
