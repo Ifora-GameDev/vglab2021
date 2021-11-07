@@ -10,9 +10,6 @@ public class Shooting : MonoBehaviour
 
     public float _fireRate = 2f;
 
-<<<<<<< HEAD
-    public int color;
-=======
     /*
      * color code: 
      * 0 orange
@@ -20,7 +17,6 @@ public class Shooting : MonoBehaviour
      */
     [SerializeField] private int color=0;
     // Start is called before the first frame update
->>>>>>> e228b6249454e085d943e84edf2d7f1065f9ce2e
 
     private float _nextFireTime = 0f;
     // Start is called before the first frame update
