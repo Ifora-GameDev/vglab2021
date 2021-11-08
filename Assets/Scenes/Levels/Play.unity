@@ -1576,7 +1576,7 @@ PrefabInstance:
       objectReference: {fileID: 1004904950}
     - target: {fileID: 3706908178313896398, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
       propertyPath: waves.Array.data[6].rate
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3706908178313896398, guid: c08424fa253a0b54d9dc6a3636305e0d, type: 3}
       propertyPath: waves.Array.data[0].isTimed
