@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: -6098168588399523847}
   - component: {fileID: 4789223746896052280}
   m_Layer: 0
-  m_Name: BOSS
+  m_Name: BossOrange
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
